@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hospital Demo - Gestión de camas</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f1f4f8;
+    color: #263238;
+}
+
+header {
+    background: #173f5f;
+    color: white;
+    padding: 18px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 26px;
+}
+
+.turno {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+select {
+    padding: 9px 14px;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.contenedor {
+    max-width: 1500px;
+    margin: auto;
+    padding: 20px;
+}
+
+.resumen {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.resumen-item {
+    background: white;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 2px 7px rgba(0,0,0,.08);
+    font-size: 13px;
+}
+
+.resumen-numero {
+    display: block;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.unidad {
+    background: white;
+    border-radius: 14px;
+    margin-bottom: 25px;
+    padding: 18px;
+    box-shadow: 0 3px 10px rgba(0,0,0,.09);
+}
+
+.unidad-titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.unidad-titulo h2 {
+    margin: 0;
+    color: #173f5f;
+    font-size: 21px;
+}
+
+.datos-unidad {
+    color: #607d8b;
+    font-size: 14px;
+}
+
+.habitaciones {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    gap: 12px;
+}
+
+.habitacion {
+    border: 1px solid #d8dee5;
+    border-radius: 10px;
+    padding: 10px;
+    background: #fafbfc;
+}
+
+.numero-habitacion {
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 9px;
+    color: #37474f;
+}
+
+.camas {
+    display: flex;
+    gap: 8px;
+}
+
+.cama {
+    flex: 1;
+    min-height: 62px;
+    border-radius: 8px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform .12s, box-shadow .12s;
+    user-select: none;
+}
+
+.cama:hover {
+    transform: scale(1.04);
+    box-shadow: 0 3px 8px rgba(0,0,0,.25);
+}
+
+.cama-letra {
+    font-size: 12px;
+    opacity: .9;
+}
+
+.cama-estado {
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.disponible {
+    background: #22a447;
+}
+
+.ocupada {
+    background: #2474d2;
+}
+
+.alta {
+    background: #e5b500;
+    color: #222;
+}
+
+.limpieza {
+    background: #f28c28;
+}
+
+.aislamiento {
+    background: #8e44ad;
+}
+
+.bloqueada {
+    background: #d93636;
+}
+
+.leyenda {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 7px rgba(0,0,0,.08);
+}
+
+.leyenda h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.leyenda-contenido {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.leyenda-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+}
+
+.punto {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.controles {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.boton {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+    background: #173f5f;
+    color: white;
+    font-size: 14px;
+}
+
+.boton:hover {
+    background: #0d3049;
+}
+
+@media (max-width: 800px) {
+    .resumen {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .resumen {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .habitaciones {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    header {
+        padding: 15px;
+    }
+
+    .contenedor {
+        padding: 10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🏥 Hospital Demo</h1>
+
+    <div class="turno">
+        <label for="turno">Turno:</label>
+        <select id="turno">
+            <option>Noche</option>
+            <option>Mañana</option>
+            <option>Tarde</option>
+        </select>
+    </div>
+</header>
+
+<div class="contenedor">
+
+    <div class="leyenda">
+        <h3>Estados de las camas</h3>
+
+        <div class="leyenda-contenido">
+            <div class="leyenda-item">
+                <span class="punto disponible"></span> Disponible
+            </div>
+
+            <div class="leyenda-item">
+                <span class="punto ocupada"></span> Ocupada
+            </div>
+
+            <div class="leyenda-item">
+                <span class="punto alta"></span> Alta prevista
+            </div>
+
+            <div class="leyenda-item">
+                <span class="punto limpieza"></span> Pendiente de limpieza
+            </div>
+
+            <div class="leyenda-item">
+                <span class="punto aislamiento"></span> Aislamiento
+            </div>
+
+            <div class="leyenda-item">
+                <span class="punto bloqueada"></span> Bloqueada
+            </div>
+        </div>
+    </div>
+
+    <div class="resumen" id="resumen"></div>
+
+    <div id="hospital"></div>
+
+</div>
+
+<script>
+
+const unidades = [
+    {
+        nombre: "UH1",
+        habitaciones: [
+            "107","108","109","110","111",
+            "112","113","114","115","116"
+        ]
+    },
+    {
+        nombre: "UH2",
+        habitaciones: [
+            "201","202","203","204","205","206","207",
+            "218","219","220","221","222","223","224"
+        ]
+    },
+    {
+        nombre: "UH3",
+        habitaciones: [
+            "301","302","303","304","305","306","307","308",
+            "309","310","311","314","315","316","317","318",
+            "319","320","321","322","323","324"
+        ]
+    },
+    {
+        nombre: "UH4",
+        habitaciones: [
+            "401","402","403","404","405","406","407","408",
+            "409","410","411","412","413","414","415","416",
+            "417","418","419","420","421","422","423","424"
+        ]
+    },
+    {
+        nombre: "UH5",
+        habitaciones: [
+            "208","209","210","216","217"
+       ]
+  }
+];
+  
+const estados = [
+    {
+        nombre: "Disponible",
+        clase: "disponible"
+    },
+    {
+        nombre: "Ocupada",
+        clase: "ocupada"
+    },
+    {
+        nombre: "Alta prevista",
+        clase: "alta"
+    },
+    {
+        nombre: "Pendiente de limpieza",
+        clase: "limpieza"
+    },
+    {
+        nombre: "Aislamiento",
+        clase: "aislamiento"
+    },
+    {
+        nombre: "Bloqueada",
+        clase: "bloqueada"
+    }
+];
+
+let camas = JSON.parse(localStorage.getItem("hospitalDemoCamas")) || {};
+
+function clave(habitacion, cama) {
+    return habitacion + "-" + cama;
+}
+
+function obtenerEstado(habitacion, cama) {
+    return camas[clave(habitacion, cama)] || 0;
+}
+
+function guardar() {
+    localStorage.setItem(
+        "hospitalDemoCamas",
+        JSON.stringify(camas)
+    );
+}
+
+function cambiarEstado(habitacion, cama) {
+
+    let estadoActual = obtenerEstado(habitacion, cama);
+
+    let nuevoEstado = (estadoActual + 1) % estados.length;
+
+    camas[clave(habitacion, cama)] = nuevoEstado;
+
+    guardar();
+    renderizar();
+}
+
+function renderizar() {
+
+    const hospital = document.getElementById("hospital");
+
+    hospital.innerHTML = "";
+
+    unidades.forEach(unidad => {
+
+        const bloque = document.createElement("section");
+        bloque.className = "unidad";
+
+        const titulo = document.createElement("div");
+        titulo.className = "unidad-titulo";
+
+        const nombre = document.createElement("h2");
+        nombre.textContent = unidad.nombre;
+
+        const datos = document.createElement("div");
+        datos.className = "datos-unidad";
+
+        let numeroHabitaciones = unidad.habitaciones.length;
+        let numeroCamas = numeroHabitaciones * 2;
+
+        datos.textContent =
+            numeroHabitaciones +
+            " habitaciones · " +
+            numeroCamas +
+            " camas";
+
+        titulo.appendChild(nombre);
+        titulo.appendChild(datos);
+
+        bloque.appendChild(titulo);
+
+        const habitaciones = document.createElement("div");
+        habitaciones.className = "habitaciones";
+
+        unidad.habitaciones.forEach(numero => {
+
+            const habitacion = document.createElement("div");
+            habitacion.className = "habitacion";
+
+            const numeroHabitacion =
+                document.createElement("div");
+
+            numeroHabitacion.className = "numero-habitacion";
+            numeroHabitacion.textContent = numero;
+
+            habitacion.appendChild(numeroHabitacion);
+
+            const camasDiv = document.createElement("div");
+            camasDiv.className = "camas";
+
+            ["A","B"].forEach(letra => {
+
+                const estado =
+                    estados[obtenerEstado(numero, letra)];
+
+                const cama = document.createElement("div");
+
+                cama.className =
+                    "cama " + estado.clase;
+
+                cama.innerHTML = `
+                    <span class="cama-letra">Cama ${letra}</span>
+                    <span class="cama-estado">${estado.nombre}</span>
+                `;
+
+                cama.onclick = () =>
+                    cambiarEstado(numero, letra);
+
+                camasDiv.appendChild(cama);
+            });
+
+            habitacion.appendChild(camasDiv);
+            habitaciones.appendChild(habitacion);
+        });
+
+        bloque.appendChild(habitaciones);
+        hospital.appendChild(bloque);
+    });
+
+    actualizarResumen();
+}
+
+function actualizarResumen() {
+
+    const resumen = document.getElementById("resumen");
+
+    let cantidades = [
+        0,0,0,0,0,0
+    ];
+
+    unidades.forEach(unidad => {
+
+        unidad.habitaciones.forEach(habitacion => {
+
+            ["A","B"].forEach(cama => {
+
+                const estado =
+                    obtenerEstado(habitacion, cama);
+
+                cantidades[estado]++;
+            });
+        });
+    });
+
+    resumen.innerHTML = "";
+
+    estados.forEach((estado, indice) => {
+
+        const item =
+            document.createElement("div");
+
+        item.className = "resumen-item";
+
+        item.innerHTML = `
+            <span
+                class="resumen-numero"
+                style="color:${getComputedStyle(document.querySelector("." + estado.clase)).backgroundColor}"
+            >
+                ${cantidades[indice]}
+            </span>
+            ${estado.nombre}
+        `;
+
+        resumen.appendChild(item);
+    });
+}
+
+document
+    .getElementById("turno")
+    .addEventListener("change", function() {
+
+        localStorage.setItem(
+            "hospitalDemoTurno",
+            this.value
+        );
+    });
+
+const turnoGuardado =
+    localStorage.getItem("hospitalDemoTurno");
+
+if (turnoGuardado) {
+    document.getElementById("turno").value =
+        turnoGuardado;
+}
+
+renderizar();
+
+</script>
+
+</body>
+</html>
