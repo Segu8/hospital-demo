@@ -1,680 +1,771 @@
-<!DOCTYPE html>
-
-<html lang="es">
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-   content="width=device-width, initial-scale=1.0">
-
-<title>Hospital Demo - Gestión de camas</title>
-
-<style>
-
+<!DOCTYPE html> <html lang="es"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Hospital Demo - Gestión de camas</title> <style>
 /* =====================================================
-   GENERAL
+GENERAL
 ===================================================== */
 
-* {
-    box-sizing: border-box;
+{
+box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #eef2f5;
-    color: #263238;
+margin: 0;
+font-family: Arial, Helvetica, sans-serif;
+background: #eef2f5;
+color: #263238;
 }
 
-
 /* =====================================================
-   CABECERA
+CABECERA
 ===================================================== */
 
 header {
-    background: #173f5f;
-    color: white;
+background: #173f5f;
+color: white;
 
-    padding: 18px 25px;
+padding: 18px 25px;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+display: flex;
+justify-content: space-between;
+align-items: center;
 
-    flex-wrap: wrap;
-    gap: 15px;
+flex-wrap: wrap;
+gap: 15px;
+
 }
 
 .titulo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+display: flex;
+align-items: center;
+gap: 12px;
 }
 
 .titulo-icono {
-    font-size: 32px;
+font-size: 32px;
 }
 
 .titulo h1 {
-    margin: 0;
-    font-size: 26px;
+margin: 0;
+font-size: 26px;
 }
 
 .subtitulo {
-    opacity: .8;
-    font-size: 13px;
+opacity: .8;
+font-size: 13px;
 }
 
 .turno {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+display: flex;
+align-items: center;
+gap: 10px;
 }
 
 .turno select {
-    padding: 9px 15px;
-    border: none;
-    border-radius: 8px;
-    font-size: 15px;
-    cursor: pointer;
+padding: 9px 15px;
+border: none;
+border-radius: 8px;
+font-size: 15px;
+cursor: pointer;
 }
 
-
 /* =====================================================
-   CONTENEDOR
+CONTENEDOR
 ===================================================== */
 
 .contenedor {
-    max-width: 1500px;
-    margin: auto;
-    padding: 20px;
+max-width: 1500px;
+margin: auto;
+padding: 20px;
 }
 
-
 /* =====================================================
-   LEYENDA
+LEYENDA
 ===================================================== */
 
 .leyenda {
-    background: white;
+background: white;
 
-    padding: 15px 20px;
+padding: 15px 20px;
 
-    border-radius: 12px;
+border-radius: 12px;
 
-    margin-bottom: 20px;
+margin-bottom: 20px;
 
-    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+box-shadow: 0 2px 8px rgba(0,0,0,.08);
+
 }
 
 .leyenda h3 {
-    margin: 0 0 12px 0;
+margin: 0 0 12px 0;
 }
 
 .leyenda-items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
+display: flex;
+flex-wrap: wrap;
+gap: 16px;
 }
 
 .leyenda-item {
-    display: flex;
-    align-items: center;
-    gap: 7px;
+display: flex;
+align-items: center;
+gap: 7px;
 
-    font-size: 13px;
+font-size: 13px;
+
 }
 
 .punto {
-    width: 18px;
-    height: 18px;
+width: 18px;
+height: 18px;
 
-    border-radius: 50%;
+border-radius: 50%;
 
-    display: inline-block;
+display: inline-block;
+
 }
 
 .verde {
-    background: #20a447;
+background: #20a447;
 }
 
 .azul {
-    background: #2878d4;
+background: #2878d4;
 }
 
 .amarillo {
-    background: #e5b400;
+background: #e5b400;
 }
 
 .naranja {
-    background: #f28c28;
+background: #f28c28;
 }
 
 .morado {
-    background: #8e44ad;
+background: #8e44ad;
 }
 
 .rojo {
-    background: #d93636;
+background: #d93636;
 }
 
-
 /* =====================================================
-   RESUMEN GENERAL
+RESUMEN GENERAL
 ===================================================== */
 
 .resumen {
-    display: grid;
+display: grid;
 
-    grid-template-columns: repeat(6, 1fr);
+grid-template-columns: repeat(6, 1fr);
 
-    gap: 10px;
+gap: 10px;
 
-    margin-bottom: 25px;
+margin-bottom: 25px;
+
 }
 
 .resumen-item {
-    background: white;
+background: white;
 
-    border-radius: 10px;
+border-radius: 10px;
 
-    padding: 12px;
+padding: 12px;
 
-    text-align: center;
+text-align: center;
 
-    box-shadow: 0 2px 8px rgba(0,0,0,.07);
+box-shadow: 0 2px 8px rgba(0,0,0,.07);
+
 }
 
 .resumen-numero {
-    display: block;
+display: block;
 
-    font-size: 25px;
+font-size: 25px;
 
-    font-weight: bold;
+font-weight: bold;
+
 }
 
 .resumen-texto {
-    font-size: 12px;
+font-size: 12px;
 }
 
-
 /* =====================================================
-   UNIDADES
+UNIDADES
 ===================================================== */
 
 .unidad {
-    background: white;
+background: white;
 
-    border-radius: 14px;
+border-radius: 14px;
 
-    margin-bottom: 25px;
+margin-bottom: 25px;
 
-    padding: 18px;
+padding: 18px;
 
-    box-shadow: 0 3px 10px rgba(0,0,0,.08);
+box-shadow: 0 3px 10px rgba(0,0,0,.08);
+
 }
 
 .unidad-cabecera {
-    display: flex;
+display: flex;
 
-    justify-content: space-between;
+justify-content: space-between;
 
-    align-items: center;
+align-items: center;
 
-    border-bottom: 1px solid #e2e7eb;
+border-bottom: 1px solid #e2e7eb;
 
-    padding-bottom: 12px;
+padding-bottom: 12px;
 
-    margin-bottom: 15px;
+margin-bottom: 15px;
 
-    flex-wrap: wrap;
+flex-wrap: wrap;
 
-    gap: 10px;
+gap: 10px;
+
 }
 
 .unidad-cabecera h2 {
-    margin: 0;
+margin: 0;
 
-    color: #173f5f;
+color: #173f5f;
+
 }
 
 .estadisticas-unidad {
-    display: flex;
+display: flex;
 
-    align-items: center;
+align-items: center;
 
-    gap: 7px;
+gap: 7px;
 
-    flex-wrap: wrap;
+flex-wrap: wrap;
+
 }
 
 .estadistica {
-    padding: 6px 9px;
+padding: 6px 9px;
 
-    border-radius: 7px;
+border-radius: 7px;
 
-    font-size: 13px;
+font-size: 13px;
 
-    font-weight: bold;
+font-weight: bold;
 
-    background: #f4f6f8;
+background: #f4f6f8;
+
 }
 
 .estadistica-ocupada {
-    color: #2878d4;
+color: #2878d4;
 }
 
 .estadistica-disponible {
-    color: #20a447;
+color: #20a447;
 }
 
 .estadistica-total {
-    color: #455a64;
+color: #455a64;
+}
+
+.estadistica-alta {
+color: #c49b00;
+}
+
+.estadistica-aislamiento {
+color: #8e44ad;
+}
+
+.estadistica-limpieza {
+color: #f28c28;
+}
+
+.estadistica-bloqueada {
+color: #d93636;
 }
 
 .estadistica-ratio {
-    color: #8e44ad;
+color: #8e44ad;
 }
 
-
 /* =====================================================
-   HABITACIONES
+HABITACIONES
 ===================================================== */
 
 .habitaciones {
-    display: grid;
+display: grid;
 
-    grid-template-columns:
-        repeat(auto-fill, minmax(150px, 1fr));
+grid-template-columns:
+    repeat(auto-fill, minmax(150px, 1fr));
 
-    gap: 12px;
+gap: 12px;
+
 }
 
 .habitacion {
-    background: #f8fafb;
+background: #f8fafb;
 
-    border: 1px solid #d8e0e5;
+border: 1px solid #d8e0e5;
 
-    border-radius: 10px;
+border-radius: 10px;
 
-    padding: 9px;
+padding: 9px;
+
 }
 
 .numero {
-    text-align: center;
+text-align: center;
 
-    font-weight: bold;
+font-weight: bold;
 
-    color: #37474f;
+color: #37474f;
 
-    margin-bottom: 8px;
+margin-bottom: 8px;
+
 }
 
-
 /* =====================================================
-   CAMAS
+CAMAS
 ===================================================== */
 
 .camas {
-    display: flex;
+display: flex;
 
-    gap: 7px;
+gap: 7px;
+
 }
 
 .cama {
-    flex: 1;
+flex: 1;
 
-    min-height: 82px;
+min-height: 95px;
 
-    border-radius: 8px;
+border-radius: 8px;
 
-    color: white;
+color: white;
 
-    display: flex;
+display: flex;
 
-    flex-direction: column;
+flex-direction: column;
 
-    justify-content: center;
+justify-content: center;
 
-    align-items: center;
+align-items: center;
 
-    cursor: pointer;
+cursor: pointer;
 
-    transition: .15s;
+transition: .15s;
 
-    user-select: none;
+user-select: none;
 
-    position: relative;
+position: relative;
 
-    padding: 5px;
+padding: 6px;
+
+text-align: center;
+
 }
 
 .cama:hover {
-    transform: scale(1.04);
+transform: scale(1.04);
 
-    box-shadow:
-        0 3px 8px rgba(0,0,0,.25);
+box-shadow:
+    0 3px 8px rgba(0,0,0,.25);
+
 }
 
 .cama-letra {
-    font-size: 12px;
+font-size: 12px;
 
-    opacity: .9;
+opacity: .9;
+
 }
 
 .cama-estado {
-    font-size: 11px;
+font-size: 11px;
 
-    margin-top: 4px;
+margin-top: 4px;
 
-    text-align: center;
+text-align: center;
 
-    line-height: 1.2;
+line-height: 1.2;
+
+font-weight: bold;
+
 }
 
-
 /* =====================================================
-   ICONOS DE CARACTERISTICAS
+INDICADORES DE LA CAMA
 ===================================================== */
 
-.iconos-cama {
-    display: flex;
+.indicadores-cama {
+display: flex;
 
-    justify-content: center;
+justify-content: center;
 
-    align-items: center;
+align-items: center;
 
-    flex-wrap: wrap;
+flex-wrap: wrap;
 
-    gap: 2px;
+gap: 3px;
 
-    margin-top: 5px;
+margin-top: 5px;
 
-    font-size: 15px;
+max-width: 100%;
 
-    line-height: 1;
 }
 
-.icono-cama {
-    display: inline-block;
-}
+.indicador {
+display: inline-flex;
 
+align-items: center;
+
+justify-content: center;
+
+background: rgba(255,255,255,.18);
+
+border-radius: 5px;
+
+padding: 2px 4px;
+
+font-size: 13px;
+
+line-height: 1;
+
+}
 
 /* =====================================================
-   MODAL
+MODAL
 ===================================================== */
 
 .modal-fondo {
-    position: fixed;
+position: fixed;
 
-    inset: 0;
+inset: 0;
 
-    background: rgba(0,0,0,.55);
+background: rgba(0,0,0,.55);
 
-    display: none;
+display: none;
 
-    justify-content: center;
+justify-content: center;
 
-    align-items: center;
+align-items: center;
 
-    padding: 20px;
+padding: 20px;
 
-    z-index: 9999;
+z-index: 9999;
+
 }
 
 .modal-fondo.visible {
-    display: flex;
+display: flex;
 }
 
 .modal {
-    background: white;
+background: white;
 
-    width: 100%;
+width: 100%;
 
-    max-width: 520px;
+max-width: 560px;
 
-    max-height: 90vh;
+max-height: 90vh;
 
-    overflow-y: auto;
+overflow-y: auto;
 
-    border-radius: 15px;
+border-radius: 15px;
 
-    box-shadow: 0 10px 35px rgba(0,0,0,.3);
+box-shadow:
+    0 10px 35px rgba(0,0,0,.3);
 
-    padding: 22px;
+padding: 22px;
+
 }
 
 .modal-cabecera {
-    display: flex;
+display: flex;
 
-    justify-content: space-between;
+justify-content: space-between;
 
-    align-items: center;
+align-items: center;
 
-    margin-bottom: 18px;
+margin-bottom: 18px;
+
 }
 
 .modal-cabecera h2 {
-    margin: 0;
+margin: 0;
 
-    color: #173f5f;
+color: #173f5f;
 
-    font-size: 21px;
+font-size: 21px;
+
 }
 
 .boton-cerrar {
-    border: none;
+border: none;
 
-    background: #eef2f5;
+background: #eef2f5;
 
-    width: 34px;
+width: 34px;
 
-    height: 34px;
+height: 34px;
 
-    border-radius: 50%;
+border-radius: 50%;
 
-    cursor: pointer;
+cursor: pointer;
 
-    font-size: 18px;
+font-size: 18px;
+
 }
 
 .boton-cerrar:hover {
-    background: #dce3e8;
+background: #dce3e8;
 }
 
-
 /* =====================================================
-   FORMULARIO MODAL
+FORMULARIO
 ===================================================== */
 
 .campo {
-    margin-bottom: 18px;
+margin-bottom: 18px;
 }
 
 .campo > label {
-    display: block;
+display: block;
 
-    font-weight: bold;
+font-weight: bold;
 
-    margin-bottom: 7px;
+margin-bottom: 7px;
 
-    color: #37474f;
+color: #37474f;
+
 }
 
 .selector-estado {
-    width: 100%;
+width: 100%;
 
-    padding: 11px;
+padding: 11px;
 
-    border: 1px solid #ccd5db;
+border: 1px solid #ccd5db;
 
-    border-radius: 8px;
+border-radius: 8px;
 
-    font-size: 15px;
+font-size: 15px;
 
-    background: white;
+background: white;
+
 }
 
+/* =====================================================
+OPCIONES
+===================================================== */
+
 .opciones {
-    display: grid;
+display: grid;
 
-    grid-template-columns: 1fr 1fr;
+grid-template-columns: 1fr 1fr;
 
-    gap: 8px;
+gap: 8px;
+
 }
 
 .opcion {
-    border: 1px solid #d8e0e5;
+border: 1px solid #d8e0e5;
 
-    border-radius: 8px;
+border-radius: 8px;
 
-    padding: 10px;
+padding: 10px;
 
-    cursor: pointer;
+cursor: pointer;
 
-    background: #fafbfc;
+background: #fafbfc;
 
-    transition: .15s;
+transition: .15s;
+
 }
 
 .opcion:hover {
-    background: #f0f4f7;
+background: #f0f4f7;
 }
 
 .opcion input {
-    margin-right: 7px;
+margin-right: 7px;
 }
 
+.opcion:has(input:checked) {
+background: #eaf3fb;
+
+border-color: #2878d4;
+
+}
+
+/* =====================================================
+AISLAMIENTOS
+===================================================== */
+
 .subopciones {
-    margin-top: 10px;
+margin-top: 10px;
 
-    padding: 12px;
+padding: 12px;
 
-    background: #f5f0f8;
+background: #f5f0f8;
 
-    border-radius: 8px;
+border-radius: 8px;
 
-    border-left: 4px solid #8e44ad;
+border-left: 4px solid #8e44ad;
+
 }
 
 .subopciones-titulo {
-    font-weight: bold;
+font-weight: bold;
 
-    color: #6c3483;
+color: #6c3483;
 
-    margin-bottom: 8px;
+margin-bottom: 8px;
+
 }
 
+.ayuda {
+color: #607d8b;
+
+font-size: 12px;
+
+margin-bottom: 10px;
+
+line-height: 1.4;
+
+}
+
+/* =====================================================
+INFORMACION DEL MODELO
+===================================================== */
+
+.info-combinacion {
+background: #eef6fc;
+
+border: 1px solid #c9e1f5;
+
+border-radius: 8px;
+
+padding: 10px 12px;
+
+margin-bottom: 18px;
+
+font-size: 12px;
+
+color: #315a75;
+
+line-height: 1.5;
+
+}
+
+/* =====================================================
+BOTONES
+===================================================== */
+
 .acciones-modal {
-    display: flex;
+display: flex;
 
-    justify-content: flex-end;
+justify-content: flex-end;
 
-    gap: 10px;
+gap: 10px;
 
-    margin-top: 20px;
+margin-top: 20px;
+
 }
 
 .boton {
-    border: none;
+border: none;
 
-    border-radius: 8px;
+border-radius: 8px;
 
-    padding: 11px 17px;
+padding: 11px 17px;
 
-    cursor: pointer;
+cursor: pointer;
 
-    font-size: 14px;
+font-size: 14px;
 
-    font-weight: bold;
+font-weight: bold;
+
 }
 
 .boton-secundario {
-    background: #e8edf0;
+background: #e8edf0;
 
-    color: #37474f;
+color: #37474f;
+
 }
 
 .boton-principal {
-    background: #173f5f;
+background: #173f5f;
 
-    color: white;
+color: white;
+
 }
 
 .boton-principal:hover {
-    background: #0d3049;
+background: #0d3049;
 }
 
-
 /* =====================================================
-   PIE
+PIE
 ===================================================== */
 
 .pie {
-    text-align: center;
+text-align: center;
 
-    color: #78909c;
+color: #78909c;
 
-    font-size: 12px;
+font-size: 12px;
 
-    padding: 20px;
+padding: 20px;
+
 }
 
-
 /* =====================================================
-   RESPONSIVE
+RESPONSIVE
 ===================================================== */
 
 @media (max-width: 900px) {
 
-    .resumen {
-        grid-template-columns: repeat(3, 1fr);
-    }
+.resumen {
+    grid-template-columns:
+        repeat(3, 1fr);
+}
 
 }
 
 @media (max-width: 600px) {
 
-    .resumen {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.resumen {
+    grid-template-columns:
+        repeat(2, 1fr);
+}
 
-    .habitaciones {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.habitaciones {
+    grid-template-columns:
+        repeat(2, 1fr);
+}
 
-    .opciones {
-        grid-template-columns: 1fr;
-    }
+.opciones {
+    grid-template-columns:
+        1fr;
+}
 
-    header {
-        padding: 15px;
-    }
+header {
+    padding: 15px;
+}
 
-    .contenedor {
-        padding: 10px;
-    }
+.contenedor {
+    padding: 10px;
+}
 
-    .unidad-cabecera {
-        align-items: flex-start;
-    }
+.unidad-cabecera {
+    align-items: flex-start;
+}
 
 }
 
-</style>
-
-</head>
-
-<body>
-
-<!-- =====================================================
-     CABECERA
-===================================================== -->
-
-<header>
-
-```
+</style> </head> <body> <!-- ===================================================== CABECERA ===================================================== --> <header>
 <div class="titulo">
 
     <div class="titulo-icono">
@@ -694,7 +785,6 @@ header {
     </div>
 
 </div>
-
 
 <div class="turno">
 
@@ -719,19 +809,8 @@ header {
     </select>
 
 </div>
-```
 
-</header>
-
-<div class="contenedor">
-
-<!-- =====================================================
-     LEYENDA
-===================================================== -->
-
-<div class="leyenda">
-
-```
+</header> <div class="contenedor"> <!-- ===================================================== LEYENDA ===================================================== --> <div class="leyenda">
 <h3>
     Estados de las camas
 </h3>
@@ -739,54 +818,65 @@ header {
 <div class="leyenda-items">
 
     <div class="leyenda-item">
+
         <span class="punto verde"></span>
+
         🟢 Disponible
+
     </div>
 
     <div class="leyenda-item">
+
         <span class="punto azul"></span>
+
         🔵 Ocupada
+
     </div>
 
     <div class="leyenda-item">
+
         <span class="punto amarillo"></span>
+
         🟡 Alta prevista
+
     </div>
 
     <div class="leyenda-item">
+
         <span class="punto naranja"></span>
+
         🟠 Pendiente de limpieza
+
     </div>
 
     <div class="leyenda-item">
+
         <span class="punto morado"></span>
+
         🟣 Aislamiento
+
     </div>
 
     <div class="leyenda-item">
+
         <span class="punto rojo"></span>
+
         🔴 Bloqueada
+
     </div>
 
 </div>
-```
 
-</div>
-
-<!-- =====================================================
-     RESUMEN GENERAL
-===================================================== -->
-
-<div class="resumen">
-
-```
+</div> <!-- ===================================================== RESUMEN GENERAL ===================================================== --> <div class="resumen">
 <div class="resumen-item">
 
     <span
         id="cantidadDisponible"
         class="resumen-numero"
         style="color:#20a447;">
+
         0
+
     </span>
 
     <span class="resumen-texto">
@@ -795,14 +885,15 @@ header {
 
 </div>
 
-
 <div class="resumen-item">
 
     <span
         id="cantidadOcupada"
         class="resumen-numero"
         style="color:#2878d4;">
+
         0
+
     </span>
 
     <span class="resumen-texto">
@@ -811,14 +902,15 @@ header {
 
 </div>
 
-
 <div class="resumen-item">
 
     <span
         id="cantidadAlta"
         class="resumen-numero"
         style="color:#c49b00;">
+
         0
+
     </span>
 
     <span class="resumen-texto">
@@ -827,14 +919,15 @@ header {
 
 </div>
 
-
 <div class="resumen-item">
 
     <span
         id="cantidadLimpieza"
         class="resumen-numero"
         style="color:#f28c28;">
+
         0
+
     </span>
 
     <span class="resumen-texto">
@@ -843,14 +936,15 @@ header {
 
 </div>
 
-
 <div class="resumen-item">
 
     <span
         id="cantidadAislamiento"
         class="resumen-numero"
         style="color:#8e44ad;">
+
         0
+
     </span>
 
     <span class="resumen-texto">
@@ -859,14 +953,15 @@ header {
 
 </div>
 
-
 <div class="resumen-item">
 
     <span
         id="cantidadBloqueada"
         class="resumen-numero"
         style="color:#d93636;">
+
         0
+
     </span>
 
     <span class="resumen-texto">
@@ -874,37 +969,14 @@ header {
     </span>
 
 </div>
-```
 
-</div>
-
-<!-- =====================================================
-     HOSPITAL
-===================================================== -->
-
-<div id="hospital"></div>
-
-</div>
-
-<div class="pie">
-
-```
+</div> <!-- ===================================================== HOSPITAL ===================================================== --> <div id="hospital"></div> </div> <!-- ===================================================== PIE ===================================================== --> <div class="pie">
 Hospital Demo · Gestión visual de camas · Sin datos de pacientes
-```
 
-</div>
-
-<!-- =====================================================
-     MODAL DE CONFIGURACION DE CAMA
-===================================================== -->
-
-<div
-    id="modalFondo"
-    class="modal-fondo">
-
-```
+</div> <!-- ===================================================== MODAL ===================================================== --> <div id="modalFondo" class="modal-fondo">
 <div class="modal">
 
+    <!-- CABECERA MODAL -->
 
     <div class="modal-cabecera">
 
@@ -915,18 +987,36 @@ Hospital Demo · Gestión visual de camas · Sin datos de pacientes
         <button
             class="boton-cerrar"
             onclick="cerrarModal()">
+
             ×
+
         </button>
 
     </div>
 
+    <!-- =================================================
+         INFORMACIÓN
+    ================================================== -->
 
-    <!-- ESTADO -->
+    <div class="info-combinacion">
+
+        Una cama puede tener varias condiciones
+        simultáneamente. Por ejemplo:
+        <strong>ocupada + alta prevista +
+        aislamiento aéreo + aislamiento psiquiátrico</strong>.
+
+    </div>
+
+    <!-- =================================================
+         ESTADO DE LA CAMA
+    ================================================== -->
 
     <div class="campo">
 
         <label for="selectorEstado">
+
             Estado de la cama
+
         </label>
 
         <select
@@ -934,52 +1024,78 @@ Hospital Demo · Gestión visual de camas · Sin datos de pacientes
             class="selector-estado">
 
             <option value="0">
+
                 🟢 Disponible
+
             </option>
 
             <option value="1">
-                🔵 Ocupada
-            </option>
 
-            <option value="2">
-                🟡 Alta prevista
+                🔵 Ocupada
+
             </option>
 
             <option value="3">
-                🟠 Pendiente de limpieza
-            </option>
 
-            <option value="4">
-                🟣 Aislamiento
+                🟠 Pendiente de limpieza
+
             </option>
 
             <option value="5">
+
                 🔴 Bloqueada
+
             </option>
 
         </select>
 
     </div>
 
+    <!-- =================================================
+         ALTA PREVISTA
+    ================================================== -->
 
-    <!-- TIPO DE AISLAMIENTO -->
+    <div class="campo">
+
+        <label class="opcion">
+
+            <input
+                type="checkbox"
+                id="altaPrevista">
+
+            🟡 Paciente con alta prevista
+
+        </label>
+
+    </div>
+
+    <!-- =================================================
+         AISLAMIENTOS
+    ================================================== -->
 
     <div
         id="bloqueAislamiento"
-        class="campo subopciones"
-        style="display:none;">
+        class="campo subopciones">
 
         <div class="subopciones-titulo">
+
             Tipo de aislamiento
+
         </div>
 
+        <div class="ayuda">
+
+            Puedes seleccionar uno o varios tipos
+            de aislamiento al mismo tiempo.
+
+        </div>
 
         <div class="opciones">
 
             <label class="opcion">
 
                 <input
-                    type="radio"
+                    type="checkbox"
                     name="tipoAislamiento"
                     value="aereo">
 
@@ -987,11 +1103,10 @@ Hospital Demo · Gestión visual de camas · Sin datos de pacientes
 
             </label>
 
-
             <label class="opcion">
 
                 <input
-                    type="radio"
+                    type="checkbox"
                     name="tipoAislamiento"
                     value="contacto">
 
@@ -999,11 +1114,10 @@ Hospital Demo · Gestión visual de camas · Sin datos de pacientes
 
             </label>
 
-
             <label class="opcion">
 
                 <input
-                    type="radio"
+                    type="checkbox"
                     name="tipoAislamiento"
                     value="psiquiatrico">
 
@@ -1011,11 +1125,10 @@ Hospital Demo · Gestión visual de camas · Sin datos de pacientes
 
             </label>
 
-
             <label class="opcion">
 
                 <input
-                    type="radio"
+                    type="checkbox"
                     name="tipoAislamiento"
                     value="compasivo">
 
@@ -1023,11 +1136,10 @@ Hospital Demo · Gestión visual de camas · Sin datos de pacientes
 
             </label>
 
-
             <label class="opcion">
 
                 <input
-                    type="radio"
+                    type="checkbox"
                     name="tipoAislamiento"
                     value="inverso">
 
@@ -1039,18 +1151,19 @@ Hospital Demo · Gestión visual de camas · Sin datos de pacientes
 
     </div>
 
-
-    <!-- CARACTERISTICAS -->
+    <!-- =================================================
+         CARACTERÍSTICAS DEL PACIENTE
+    ================================================== -->
 
     <div class="campo">
 
         <label>
+
             Características del paciente
+
         </label>
 
-
         <div class="opciones">
-
 
             <label class="opcion">
 
@@ -1062,17 +1175,16 @@ Hospital Demo · Gestión visual de camas · Sin datos de pacientes
 
             </label>
 
-
             <label class="opcion">
 
                 <input
                     type="checkbox"
                     id="desorientacion">
 
-                ⚠️ Desorientación / riesgo de caídas
+                ⚠️ Desorientación /
+                riesgo de caídas
 
             </label>
-
 
             <label class="opcion">
 
@@ -1084,7 +1196,6 @@ Hospital Demo · Gestión visual de camas · Sin datos de pacientes
 
             </label>
 
-
             <label class="opcion">
 
                 <input
@@ -1094,7 +1205,6 @@ Hospital Demo · Gestión visual de camas · Sin datos de pacientes
                 🩹 Intervenido 24–48 h
 
             </label>
-
 
             <label class="opcion">
 
@@ -1106,7 +1216,6 @@ Hospital Demo · Gestión visual de camas · Sin datos de pacientes
 
             </label>
 
-
             <label class="opcion">
 
                 <input
@@ -1117,13 +1226,13 @@ Hospital Demo · Gestión visual de camas · Sin datos de pacientes
 
             </label>
 
-
         </div>
 
     </div>
 
-
-    <!-- BOTONES -->
+    <!-- =================================================
+         BOTONES
+    ================================================== -->
 
     <div class="acciones-modal">
 
@@ -1135,7 +1244,6 @@ Hospital Demo · Gestión visual de camas · Sin datos de pacientes
 
         </button>
 
-
         <button
             class="boton boton-principal"
             onclick="guardarConfiguracion()">
@@ -1146,1144 +1254,1554 @@ Hospital Demo · Gestión visual de camas · Sin datos de pacientes
 
     </div>
 
-
-</div>
-```
-
 </div>
 
-<script>
-
-
+</div> <script>
 /* =====================================================
-   DATOS DEL HOSPITAL
+DATOS DEL HOSPITAL
 ===================================================== */
 
 const unidades = [
 
-    {
-        nombre: "UH1",
+{
+    nombre: "UH1",
 
-        habitaciones: [
-            "107",
-            "108",
-            "109",
-            "110",
-            "111",
-            "112",
-            "113",
-            "114",
-            "115",
-            "116"
-        ],
+    habitaciones: [
+        "107",
+        "108",
+        "109",
+        "110",
+        "111",
+        "112",
+        "113",
+        "114",
+        "115",
+        "116"
+    ],
 
-        ratio: 10
-    },
+    ratio: 10
+},
 
+{
+    nombre: "UH2",
 
-    {
-        nombre: "UH2",
+    habitaciones: [
+        "201",
+        "202",
+        "203",
+        "204",
+        "205",
+        "206",
+        "207",
+        "218",
+        "219",
+        "220",
+        "221",
+        "222",
+        "223",
+        "224"
+    ],
 
-        habitaciones: [
-            "201",
-            "202",
-            "203",
-            "204",
-            "205",
-            "206",
-            "207",
-            "218",
-            "219",
-            "220",
-            "221",
-            "222",
-            "223",
-            "224"
-        ],
+    ratio: 27
+},
 
-        ratio: 27
-    },
+{
+    nombre: "UH3",
 
+    habitaciones: [
+        "301",
+        "302",
+        "303",
+        "304",
+        "305",
+        "306",
+        "307",
+        "308",
+        "309",
+        "310",
+        "311",
+        "314",
+        "315",
+        "316",
+        "317",
+        "318",
+        "319",
+        "320",
+        "321",
+        "322",
+        "323",
+        "324"
+    ],
 
-    {
-        nombre: "UH3",
+    ratio: 35
+},
 
-        habitaciones: [
-            "301",
-            "302",
-            "303",
-            "304",
-            "305",
-            "306",
-            "307",
-            "308",
-            "309",
-            "310",
-            "311",
-            "314",
-            "315",
-            "316",
-            "317",
-            "318",
-            "319",
-            "320",
-            "321",
-            "322",
-            "323",
-            "324"
-        ],
+{
+    nombre: "UH4",
 
-        ratio: 35
-    },
+    habitaciones: [
+        "401",
+        "402",
+        "403",
+        "404",
+        "405",
+        "406",
+        "407",
+        "408",
+        "409",
+        "410",
+        "411",
+        "412",
+        "413",
+        "414",
+        "415",
+        "416",
+        "417",
+        "418",
+        "419",
+        "420",
+        "421",
+        "422",
+        "423",
+        "424"
+    ],
 
+    ratio: 36
+},
 
-    {
-        nombre: "UH4",
+{
+    nombre: "UH5",
 
-        habitaciones: [
-            "401",
-            "402",
-            "403",
-            "404",
-            "405",
-            "406",
-            "407",
-            "408",
-            "409",
-            "410",
-            "411",
-            "412",
-            "413",
-            "414",
-            "415",
-            "416",
-            "417",
-            "418",
-            "419",
-            "420",
-            "421",
-            "422",
-            "423",
-            "424"
-        ],
+    habitaciones: [
+        "208",
+        "209",
+        "210",
+        "216",
+        "217"
+    ],
 
-        ratio: 36
-    },
-
-
-    {
-        nombre: "UH5",
-
-        habitaciones: [
-            "208",
-            "209",
-            "210",
-            "216",
-            "217"
-        ],
-
-        ratio: 10
-    }
+    ratio: 10
+}
 
 ];
 
-
 /* =====================================================
-   ESTADOS
-===================================================== */
-
-const estados = [
-
-    {
-        nombre: "Disponible",
-        clase: "verde"
-    },
-
-    {
-        nombre: "Ocupada",
-        clase: "azul"
-    },
-
-    {
-        nombre: "Alta prevista",
-        clase: "amarillo"
-    },
-
-    {
-        nombre: "Pendiente de limpieza",
-        clase: "naranja"
-    },
-
-    {
-        nombre: "Aislamiento",
-        clase: "morado"
-    },
-
-    {
-        nombre: "Bloqueada",
-        clase: "rojo"
-    }
-
-];
-
-
-/* =====================================================
-   DATOS DE LAS CAMAS
+DATOS DE LAS CAMAS
 ===================================================== */
 
 let datosCamas =
-    JSON.parse(
-        localStorage.getItem(
-            "hospitalDemoDatosCamas"
-        )
-    ) || {};
-
+JSON.parse(
+localStorage.getItem(
+"hospitalDemoDatosCamas"
+)
+) || {};
 
 /* =====================================================
-   TURNO
+MIGRACIÓN DE DATOS ANTIGUOS
 ===================================================== */
 
-const selectorTurno =
-    document.getElementById(
-        "selectorTurno"
-    );
+Object.values(datosCamas).forEach(
+function(datos) {
 
+    /*
+     * AISLAMIENTO ANTIGUO
+     *
+     * Antes:
+     *
+     * aislamiento: "aereo"
+     *
+     * Ahora:
+     *
+     * aislamientos: ["aereo"]
+     */
 
-const turnoGuardado =
-    localStorage.getItem(
-        "hospitalDemoTurno"
-    );
+    if (
+        !Array.isArray(
+            datos.aislamientos
+        )
+    ) {
 
+        datos.aislamientos =
+            datos.aislamiento
+                ? [datos.aislamiento]
+                : [];
 
-if (turnoGuardado) {
+    }
 
-    selectorTurno.value =
-        turnoGuardado;
+    /*
+     * OCUPACIÓN ANTIGUA
+     */
+
+    if (
+        typeof datos.ocupada !==
+        "boolean"
+    ) {
+
+        datos.ocupada =
+            datos.estado === 1 ||
+            datos.estado === 4;
+
+    }
+
+    /*
+     * ALTA PREVISTA ANTIGUA
+     */
+
+    if (
+        typeof datos.altaPrevista !==
+        "boolean"
+    ) {
+
+        datos.altaPrevista =
+            datos.estado === 2;
+
+    }
 
 }
 
-
-selectorTurno.addEventListener(
-    "change",
-    function() {
-
-        localStorage.setItem(
-            "hospitalDemoTurno",
-            this.value
-        );
-
-    }
 );
 
-
 /* =====================================================
-   CAMA ACTUAL DEL MODAL
-===================================================== */
-
-let camaSeleccionada = null;
-
-
-/* =====================================================
-   OBTENER DATOS DE UNA CAMA
-===================================================== */
-
-function obtenerDatosCama(numero, letra) {
-
-    const clave =
-        numero + "-" + letra;
-
-
-    if (!datosCamas[clave]) {
-
-        datosCamas[clave] = {
-
-            estado: 0,
-
-            aislamiento: "",
-
-            contencion: false,
-
-            desorientacion: false,
-
-            intervenido24: false,
-
-            intervenido48: false,
-
-            vmni: false,
-
-            lavadoVesical: false
-
-        };
-
-    }
-
-
-    return datosCamas[clave];
-
-}
-
-
-/* =====================================================
-   GUARDAR DATOS
+GUARDAR DATOS
 ===================================================== */
 
 function guardarDatos() {
 
+localStorage.setItem(
+    "hospitalDemoDatosCamas",
+    JSON.stringify(
+        datosCamas
+    )
+);
+
+}
+
+/* =====================================================
+TURNO
+===================================================== */
+
+const selectorTurno =
+document.getElementById(
+"selectorTurno"
+);
+
+const turnoGuardado =
+localStorage.getItem(
+"hospitalDemoTurno"
+);
+
+if (turnoGuardado) {
+
+selectorTurno.value =
+    turnoGuardado;
+
+}
+
+selectorTurno.addEventListener(
+"change",
+function() {
+
     localStorage.setItem(
-        "hospitalDemoDatosCamas",
-        JSON.stringify(datosCamas)
+        "hospitalDemoTurno",
+        this.value
     );
 
 }
 
+);
 
 /* =====================================================
-   ICONO DEL AISLAMIENTO
+CAMA SELECCIONADA
 ===================================================== */
 
-function obtenerIconoAislamiento(tipo) {
+let camaSeleccionada = null;
 
-    const iconos = {
+/* =====================================================
+OBTENER DATOS DE CAMA
+===================================================== */
 
-        aereo: "💨",
+function obtenerDatosCama(
+numero,
+letra
+) {
 
-        contacto: "🤝",
+const clave =
+    numero + "-" + letra;
 
-        psiquiatrico: "🧠",
+if (
+    !datosCamas[clave]
+) {
 
-        compasivo: "❤️",
+    datosCamas[clave] = {
 
-        inverso: "🔄"
+        estado: 0,
+
+        ocupada: false,
+
+        altaPrevista: false,
+
+        aislamientos: [],
+
+        contencion: false,
+
+        desorientacion: false,
+
+        intervenido24: false,
+
+        intervenido48: false,
+
+        vmni: false,
+
+        lavadoVesical: false
 
     };
 
+}
 
-    return iconos[tipo] || "";
+const datos =
+    datosCamas[clave];
+
+/*
+ * Garantizar propiedades nuevas
+ */
+
+if (
+    !Array.isArray(
+        datos.aislamientos
+    )
+) {
+
+    datos.aislamientos = [];
 
 }
 
+if (
+    typeof datos.ocupada !==
+    "boolean"
+) {
 
-/* =====================================================
-   CREAR ICONOS
-===================================================== */
-
-function crearIconos(datos) {
-
-    let iconos = "";
-
-
-    if (
-        datos.estado === 4 &&
-        datos.aislamiento
-    ) {
-
-        iconos +=
-            `<span class="icono-cama"
-                  title="Aislamiento: ${obtenerNombreAislamiento(datos.aislamiento)}">
-                ${obtenerIconoAislamiento(datos.aislamiento)}
-             </span>`;
-
-    }
-
-
-    if (datos.contencion) {
-
-        iconos +=
-            `<span class="icono-cama"
-                  title="Contención mecánica">
-                ⛓️
-             </span>`;
-
-    }
-
-
-    if (datos.desorientacion) {
-
-        iconos +=
-            `<span class="icono-cama"
-                  title="Desorientación / riesgo de caídas">
-                ⚠️
-             </span>`;
-
-    }
-
-
-    if (datos.intervenido24) {
-
-        iconos +=
-            `<span class="icono-cama"
-                  title="Intervenido hace menos de 24 horas">
-                🩺
-             </span>`;
-
-    }
-
-
-    if (datos.intervenido48) {
-
-        iconos +=
-            `<span class="icono-cama"
-                  title="Intervenido hace 24-48 horas">
-                🩹
-             </span>`;
-
-    }
-
-
-    if (datos.vmni) {
-
-        iconos +=
-            `<span class="icono-cama"
-                  title="VMNI">
-                😷
-             </span>`;
-
-    }
-
-
-    if (datos.lavadoVesical) {
-
-        iconos +=
-            `<span class="icono-cama"
-                  title="Lavado vesical">
-                💧
-             </span>`;
-
-    }
-
-
-    if (!iconos) {
-
-        return "";
-
-    }
-
-
-    return `
-        <div class="iconos-cama">
-            ${iconos}
-        </div>
-    `;
+    datos.ocupada =
+        datos.estado === 1;
 
 }
 
+if (
+    typeof datos.altaPrevista !==
+    "boolean"
+) {
+
+    datos.altaPrevista =
+        datos.estado === 2;
+
+}
+
+return datos;
+
+}
 
 /* =====================================================
-   NOMBRE AISLAMIENTO
+ICONOS AISLAMIENTOS
 ===================================================== */
 
-function obtenerNombreAislamiento(tipo) {
+function obtenerIconoAislamiento(
+tipo
+) {
 
-    const nombres = {
+const iconos = {
 
-        aereo: "Aéreo/gotas",
+    aereo: "💨",
 
-        contacto: "Contacto",
+    contacto: "🤝",
 
-        psiquiatrico: "Psiquiátrico",
+    psiquiatrico: "🧠",
 
-        compasivo: "Compasivo",
+    compasivo: "❤️",
 
-        inverso: "Inverso"
+    inverso: "🔄"
+
+};
+
+return (
+    iconos[tipo] || ""
+);
+
+}
+
+/* =====================================================
+NOMBRES AISLAMIENTOS
+===================================================== */
+
+function obtenerNombreAislamiento(
+tipo
+) {
+
+const nombres = {
+
+    aereo: "Aéreo/gotas",
+
+    contacto: "Contacto",
+
+    psiquiatrico: "Psiquiátrico",
+
+    compasivo: "Compasivo",
+
+    inverso: "Inverso"
+
+};
+
+return (
+    nombres[tipo] || ""
+);
+
+}
+
+/* =====================================================
+CREAR ICONOS
+===================================================== */
+
+function crearIconos(
+datos
+) {
+
+let iconos = "";
+
+/*
+ * AISLAMIENTOS
+ */
+
+if (
+    Array.isArray(
+        datos.aislamientos
+    )
+) {
+
+    datos.aislamientos.forEach(
+        function(tipo) {
+
+            iconos +=
+                `
+                <span
+                    class="indicador"
+                    title="Aislamiento: ${obtenerNombreAislamiento(tipo)}">
+
+                    ${obtenerIconoAislamiento(tipo)}
+
+                </span>
+                `;
+
+        }
+    );
+
+}
+
+/*
+ * ALTA PREVISTA
+ */
+
+if (
+    datos.altaPrevista
+) {
+
+    iconos +=
+        `
+        <span
+            class="indicador"
+            title="Paciente con alta prevista">
+
+            🏁
+
+        </span>
+        `;
+
+}
+
+/*
+ * CONTENCIÓN
+ */
+
+if (
+    datos.contencion
+) {
+
+    iconos +=
+        `
+        <span
+            class="indicador"
+            title="Contención mecánica">
+
+            ⛓️
+
+        </span>
+        `;
+
+}
+
+/*
+ * DESORIENTACIÓN
+ */
+
+if (
+    datos.desorientacion
+) {
+
+    iconos +=
+        `
+        <span
+            class="indicador"
+            title="Desorientación / riesgo de caídas">
+
+            ⚠️
+
+        </span>
+        `;
+
+}
+
+/*
+ * INTERVENIDO <24H
+ */
+
+if (
+    datos.intervenido24
+) {
+
+    iconos +=
+        `
+        <span
+            class="indicador"
+            title="Intervenido hace menos de 24 horas">
+
+            🩺
+
+        </span>
+        `;
+
+}
+
+/*
+ * INTERVENIDO 24-48H
+ */
+
+if (
+    datos.intervenido48
+) {
+
+    iconos +=
+        `
+        <span
+            class="indicador"
+            title="Intervenido hace 24-48 horas">
+
+            🩹
+
+        </span>
+        `;
+
+}
+
+/*
+ * VMNI
+ */
+
+if (
+    datos.vmni
+) {
+
+    iconos +=
+        `
+        <span
+            class="indicador"
+            title="VMNI">
+
+            😷
+
+        </span>
+        `;
+
+}
+
+/*
+ * LAVADO VESICAL
+ */
+
+if (
+    datos.lavadoVesical
+) {
+
+    iconos +=
+        `
+        <span
+            class="indicador"
+            title="Lavado vesical">
+
+            💧
+
+        </span>
+        `;
+
+}
+
+if (!iconos) {
+
+    return "";
+
+}
+
+return `
+    <div class="indicadores-cama">
+        ${iconos}
+    </div>
+`;
+
+}
+
+/* =====================================================
+OBTENER ESTADO VISUAL
+===================================================== */
+
+function obtenerEstadoVisual(
+datos
+) {
+
+/*
+ * PRIORIDAD VISUAL:
+ *
+ * Bloqueada
+ * Limpieza
+ * Alta prevista
+ * Ocupada
+ * Disponible
+ *
+ * El aislamiento NO cambia el
+ * estado principal de la cama.
+ */
+
+if (
+    datos.estado === 5
+) {
+
+    return {
+
+        nombre: "Bloqueada",
+
+        clase: "rojo"
 
     };
 
+}
 
-    return nombres[tipo] || "";
+if (
+    datos.estado === 3
+) {
+
+    return {
+
+        nombre: "Pendiente de limpieza",
+
+        clase: "naranja"
+
+    };
 
 }
 
+if (
+    datos.altaPrevista
+) {
+
+    return {
+
+        nombre: "Alta prevista",
+
+        clase: "amarillo"
+
+    };
+
+}
+
+if (
+    datos.ocupada
+) {
+
+    return {
+
+        nombre: "Ocupada",
+
+        clase: "azul"
+
+    };
+
+}
+
+return {
+
+    nombre: "Disponible",
+
+    clase: "verde"
+
+};
+
+}
 
 /* =====================================================
-   CREAR CAMA
+CREAR CAMA
 ===================================================== */
 
-function crearCama(numero, letra) {
+function crearCama(
+numero,
+letra
+) {
 
-    const datos =
-        obtenerDatosCama(
+const datos =
+    obtenerDatosCama(
+        numero,
+        letra
+    );
+
+const elemento =
+    document.createElement(
+        "div"
+    );
+
+const estadoVisual =
+    obtenerEstadoVisual(
+        datos
+    );
+
+elemento.className =
+    "cama " +
+    estadoVisual.clase;
+
+elemento.innerHTML = `
+
+    <span class="cama-letra">
+
+        Cama ${letra}
+
+    </span>
+
+    <span class="cama-estado">
+
+        ${estadoVisual.nombre}
+
+    </span>
+
+    ${crearIconos(datos)}
+
+`;
+
+elemento.addEventListener(
+    "click",
+    function() {
+
+        abrirModal(
             numero,
             letra
         );
 
+    }
+);
 
-    const elemento =
-        document.createElement(
-            "div"
-        );
+return elemento;
 
+}
 
-    const estado =
-        estados[datos.estado];
+/* =====================================================
+ABRIR MODAL
+===================================================== */
 
+function abrirModal(
+numero,
+letra
+) {
 
-    elemento.className =
-        "cama " + estado.clase;
+camaSeleccionada = {
 
+    numero: numero,
 
-    elemento.innerHTML = `
+    letra: letra
 
-        <span class="cama-letra">
-            Cama ${letra}
-        </span>
+};
 
-        <span class="cama-estado">
-            ${estado.nombre}
-        </span>
+const datos =
+    obtenerDatosCama(
+        numero,
+        letra
+    );
 
-        ${crearIconos(datos)}
+document.getElementById(
+    "tituloModal"
+).textContent =
+    "Habitación " +
+    numero +
+    " · Cama " +
+    letra;
 
-    `;
+/*
+ * ESTADO
+ */
 
+let estadoFormulario =
+    datos.estado;
 
-    elemento.addEventListener(
-        "click",
-        function() {
+/*
+ * El estado antiguo 2 era
+ * Alta prevista.
+ *
+ * Ahora el alta es independiente.
+ */
 
-            abrirModal(
-                numero,
-                letra
+if (
+    estadoFormulario === 2
+) {
+
+    estadoFormulario =
+        datos.ocupada
+            ? 1
+            : 0;
+
+}
+
+/*
+ * El estado antiguo 4 era
+ * aislamiento.
+ *
+ * Ahora aislamiento es independiente.
+ */
+
+if (
+    estadoFormulario === 4
+) {
+
+    estadoFormulario =
+        datos.ocupada
+            ? 1
+            : 0;
+
+}
+
+document.getElementById(
+    "selectorEstado"
+).value =
+    estadoFormulario;
+
+/*
+ * ALTA PREVISTA
+ */
+
+document.getElementById(
+    "altaPrevista"
+).checked =
+    datos.altaPrevista;
+
+/*
+ * AISLAMIENTOS
+ */
+
+const checkboxes =
+    document.querySelectorAll(
+        'input[name="tipoAislamiento"]'
+    );
+
+checkboxes.forEach(
+    function(checkbox) {
+
+        checkbox.checked =
+            datos.aislamientos.includes(
+                checkbox.value
             );
 
-        }
-    );
+    }
+);
 
+/*
+ * CARACTERÍSTICAS
+ */
 
-    return elemento;
+document.getElementById(
+    "contencion"
+).checked =
+    datos.contencion;
 
-}
+document.getElementById(
+    "desorientacion"
+).checked =
+    datos.desorientacion;
 
+document.getElementById(
+    "intervenido24"
+).checked =
+    datos.intervenido24;
 
-/* =====================================================
-   ABRIR MODAL
-===================================================== */
+document.getElementById(
+    "intervenido48"
+).checked =
+    datos.intervenido48;
 
-function abrirModal(numero, letra) {
+document.getElementById(
+    "vmni"
+).checked =
+    datos.vmni;
 
-    camaSeleccionada = {
+document.getElementById(
+    "lavadoVesical"
+).checked =
+    datos.lavadoVesical;
 
-        numero: numero,
+/*
+ * MOSTRAR MODAL
+ */
 
-        letra: letra
-
-    };
-
-
-    const datos =
-        obtenerDatosCama(
-            numero,
-            letra
-        );
-
-
-    document.getElementById(
-        "tituloModal"
-    ).textContent =
-        "Habitación " +
-        numero +
-        " · Cama " +
-        letra;
-
-
-    document.getElementById(
-        "selectorEstado"
-    ).value =
-        datos.estado;
-
-
-    document.getElementById(
-        "contencion"
-    ).checked =
-        datos.contencion;
-
-
-    document.getElementById(
-        "desorientacion"
-    ).checked =
-        datos.desorientacion;
-
-
-    document.getElementById(
-        "intervenido24"
-    ).checked =
-        datos.intervenido24;
-
-
-    document.getElementById(
-        "intervenido48"
-    ).checked =
-        datos.intervenido48;
-
-
-    document.getElementById(
-        "vmni"
-    ).checked =
-        datos.vmni;
-
-
-    document.getElementById(
-        "lavadoVesical"
-    ).checked =
-        datos.lavadoVesical;
-
-
-    const radios =
-        document.querySelectorAll(
-            'input[name="tipoAislamiento"]'
-        );
-
-
-    radios.forEach(
-        function(radio) {
-
-            radio.checked =
-                radio.value ===
-                datos.aislamiento;
-
-        }
-    );
-
-
-    actualizarVisibilidadAislamiento();
-
-
-    document.getElementById(
-        "modalFondo"
-    ).classList.add(
-        "visible"
-    );
+document.getElementById(
+    "modalFondo"
+).classList.add(
+    "visible"
+);
 
 }
 
-
 /* =====================================================
-   CERRAR MODAL
+CERRAR MODAL
 ===================================================== */
 
 function cerrarModal() {
 
-    document.getElementById(
-        "modalFondo"
-    ).classList.remove(
-        "visible"
-    );
-
-
-    camaSeleccionada = null;
-
-}
-
-
-/* =====================================================
-   VISIBILIDAD AISLAMIENTO
-===================================================== */
-
-function actualizarVisibilidadAislamiento() {
-
-    const estado =
-        document.getElementById(
-            "selectorEstado"
-        ).value;
-
-
-    const bloque =
-        document.getElementById(
-            "bloqueAislamiento"
-        );
-
-
-    if (estado === "4") {
-
-        bloque.style.display =
-            "block";
-
-    } else {
-
-        bloque.style.display =
-            "none";
-
-    }
-
-}
-
-
 document.getElementById(
-    "selectorEstado"
-).addEventListener(
-    "change",
-    actualizarVisibilidadAislamiento
+    "modalFondo"
+).classList.remove(
+    "visible"
 );
 
+camaSeleccionada =
+    null;
+
+}
 
 /* =====================================================
-   GUARDAR CONFIGURACION
+GUARDAR CONFIGURACION
 ===================================================== */
 
 function guardarConfiguracion() {
 
-    if (!camaSeleccionada) {
+if (
+    !camaSeleccionada
+) {
 
-        return;
-
-    }
-
-
-    const numero =
-        camaSeleccionada.numero;
-
-
-    const letra =
-        camaSeleccionada.letra;
-
-
-    const datos =
-        obtenerDatosCama(
-            numero,
-            letra
-        );
-
-
-    datos.estado =
-        Number(
-            document.getElementById(
-                "selectorEstado"
-            ).value
-        );
-
-
-    const aislamientoSeleccionado =
-        document.querySelector(
-            'input[name="tipoAislamiento"]:checked'
-        );
-
-
-    if (
-        aislamientoSeleccionado
-    ) {
-
-        datos.aislamiento =
-            aislamientoSeleccionado.value;
-
-    } else {
-
-        datos.aislamiento = "";
-
-    }
-
-
-    datos.contencion =
-        document.getElementById(
-            "contencion"
-        ).checked;
-
-
-    datos.desorientacion =
-        document.getElementById(
-            "desorientacion"
-        ).checked;
-
-
-    datos.intervenido24 =
-        document.getElementById(
-            "intervenido24"
-        ).checked;
-
-
-    datos.intervenido48 =
-        document.getElementById(
-            "intervenido48"
-        ).checked;
-
-
-    datos.vmni =
-        document.getElementById(
-            "vmni"
-        ).checked;
-
-
-    datos.lavadoVesical =
-        document.getElementById(
-            "lavadoVesical"
-        ).checked;
-
-
-    guardarDatos();
-
-
-    cerrarModal();
-
-
-    dibujarHospital();
+    return;
 
 }
 
+const numero =
+    camaSeleccionada.numero;
 
-/* =====================================================
-   CERRAR MODAL AL PULSAR FUERA
-===================================================== */
+const letra =
+    camaSeleccionada.letra;
 
-document.getElementById(
-    "modalFondo"
-).addEventListener(
-    "click",
-    function(event) {
+const datos =
+    obtenerDatosCama(
+        numero,
+        letra
+    );
 
-        if (
-            event.target ===
-            this
-        ) {
+/*
+ * ESTADO PRINCIPAL
+ */
 
-            cerrarModal();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   DIBUJAR HOSPITAL
-===================================================== */
-
-function dibujarHospital() {
-
-    const hospital =
+datos.estado =
+    Number(
         document.getElementById(
-            "hospital"
-        );
+            "selectorEstado"
+        ).value
+    );
 
+/*
+ * OCUPACIÓN
+ *
+ * Ocupada = paciente en cama.
+ */
 
-    hospital.innerHTML = "";
+if (
+    datos.estado === 1
+) {
 
+    datos.ocupada =
+        true;
 
-    const contadores = [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-    ];
+}
 
+/*
+ * Disponible = sin paciente.
+ */
 
-    unidades.forEach(
-        function(unidad) {
+if (
+    datos.estado === 0
+) {
 
+    datos.ocupada =
+        false;
 
-            /*
-            =========================================
-            CONTADORES DE LA UNIDAD
-            =========================================
-            */
+}
 
-            let camasOcupadas = 0;
+/*
+ * Limpieza = sin paciente.
+ */
 
-            let camasDisponibles = 0;
+if (
+    datos.estado === 3
+) {
 
-            const camasTotales =
-                unidad.habitaciones.length * 2;
+    datos.ocupada =
+        false;
 
+}
 
-            unidad.habitaciones.forEach(
-                function(numero) {
+/*
+ * Bloqueada = sin paciente.
+ */
 
+if (
+    datos.estado === 5
+) {
 
-                    ["A", "B"].forEach(
-                        function(letra) {
+    datos.ocupada =
+        false;
 
+}
 
-                            const datos =
-                                obtenerDatosCama(
-                                    numero,
-                                    letra
-                                );
+/*
+ * ALTA PREVISTA
+ *
+ * Es independiente de ocupación.
+ */
 
+datos.altaPrevista =
+    document.getElementById(
+        "altaPrevista"
+    ).checked;
 
-                            const estado =
-                                datos.estado;
+/*
+ * AISLAMIENTOS MÚLTIPLES
+ */
 
+datos.aislamientos =
+    Array.from(
+        document.querySelectorAll(
+            'input[name="tipoAislamiento"]:checked'
+        )
+    ).map(
+        function(checkbox) {
 
-                            contadores[
-                                estado
-                            ]++;
-
-
-                            /*
-                            Solo el estado
-                            "Ocupada" cuenta
-                            como ocupada.
-                            */
-
-                            if (
-                                estado === 1
-                            ) {
-
-                                camasOcupadas++;
-
-                            }
-
-
-                            /*
-                            Solo "Disponible"
-                            cuenta como disponible.
-                            */
-
-                            if (
-                                estado === 0
-                            ) {
-
-                                camasDisponibles++;
-
-                            }
-
-                        }
-                    );
-
-                }
-            );
-
-
-            /*
-            =========================================
-            BLOQUE UNIDAD
-            =========================================
-            */
-
-            const bloque =
-                document.createElement(
-                    "section"
-                );
-
-
-            bloque.className =
-                "unidad";
-
-
-            /*
-            =========================================
-            CABECERA
-            =========================================
-            */
-
-            const cabecera =
-                document.createElement(
-                    "div"
-                );
-
-
-            cabecera.className =
-                "unidad-cabecera";
-
-
-            const titulo =
-                document.createElement(
-                    "h2"
-                );
-
-
-            titulo.textContent =
-                unidad.nombre;
-
-
-            const informacion =
-                document.createElement(
-                    "div"
-                );
-
-
-            informacion.className =
-                "estadisticas-unidad";
-
-
-            informacion.innerHTML = `
-
-                <span class="estadistica estadistica-ocupada">
-                    🔵 ${camasOcupadas} ocupadas
-                </span>
-
-                <span class="estadistica estadistica-disponible">
-                    🟢 ${camasDisponibles} disponibles
-                </span>
-
-                <span class="estadistica estadistica-total">
-                    ⚪ ${camasTotales} camas
-                </span>
-
-                <span class="estadistica estadistica-ratio">
-                    👤 Ratio: ${unidad.ratio}
-                </span>
-
-            `;
-
-
-            cabecera.appendChild(
-                titulo
-            );
-
-
-            cabecera.appendChild(
-                informacion
-            );
-
-
-            bloque.appendChild(
-                cabecera
-            );
-
-
-            /*
-            =========================================
-            HABITACIONES
-            =========================================
-            */
-
-            const habitaciones =
-                document.createElement(
-                    "div"
-                );
-
-
-            habitaciones.className =
-                "habitaciones";
-
-
-            unidad.habitaciones.forEach(
-                function(numero) {
-
-
-                    const habitacion =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    habitacion.className =
-                        "habitacion";
-
-
-                    const numeroElemento =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    numeroElemento.className =
-                        "numero";
-
-
-                    numeroElemento.textContent =
-                        "Habitación " +
-                        numero;
-
-
-                    habitacion.appendChild(
-                        numeroElemento
-                    );
-
-
-                    const camas =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    camas.className =
-                        "camas";
-
-
-                    camas.appendChild(
-                        crearCama(
-                            numero,
-                            "A"
-                        )
-                    );
-
-
-                    camas.appendChild(
-                        crearCama(
-                            numero,
-                            "B"
-                        )
-                    );
-
-
-                    habitacion.appendChild(
-                        camas
-                    );
-
-
-                    habitaciones.appendChild(
-                        habitacion
-                    );
-
-                }
-            );
-
-
-            bloque.appendChild(
-                habitaciones
-            );
-
-
-            hospital.appendChild(
-                bloque
-            );
+            return checkbox.value;
 
         }
     );
 
+/*
+ * CARACTERÍSTICAS
+ */
 
-    /*
-    =========================================
-    ACTUALIZAR RESUMEN GENERAL
-    =========================================
-    */
-
+datos.contencion =
     document.getElementById(
-        "cantidadDisponible"
-    ).textContent =
-        contadores[0];
+        "contencion"
+    ).checked;
 
-
+datos.desorientacion =
     document.getElementById(
-        "cantidadOcupada"
-    ).textContent =
-        contadores[1];
+        "desorientacion"
+    ).checked;
 
-
+datos.intervenido24 =
     document.getElementById(
-        "cantidadAlta"
-    ).textContent =
-        contadores[2];
+        "intervenido24"
+    ).checked;
 
-
+datos.intervenido48 =
     document.getElementById(
-        "cantidadLimpieza"
-    ).textContent =
-        contadores[3];
+        "intervenido48"
+    ).checked;
 
-
+datos.vmni =
     document.getElementById(
-        "cantidadAislamiento"
-    ).textContent =
-        contadores[4];
+        "vmni"
+    ).checked;
 
-
+datos.lavadoVesical =
     document.getElementById(
-        "cantidadBloqueada"
-    ).textContent =
-        contadores[5];
+        "lavadoVesical"
+    ).checked;
+
+/*
+ * GUARDAR
+ */
+
+guardarDatos();
+
+cerrarModal();
+
+dibujarHospital();
 
 }
 
+/* =====================================================
+CERRAR MODAL AL PULSAR FUERA
+===================================================== */
+
+document.getElementById(
+"modalFondo"
+).addEventListener(
+"click",
+function(event) {
+
+    if (
+        event.target === this
+    ) {
+
+        cerrarModal();
+
+    }
+
+}
+
+);
 
 /* =====================================================
-   INICIAR
+DIBUJAR HOSPITAL
+===================================================== */
+
+function dibujarHospital() {
+
+const hospital =
+    document.getElementById(
+        "hospital"
+    );
+
+hospital.innerHTML =
+    "";
+
+/*
+ * CONTADORES GENERALES
+ */
+
+const contadores = {
+
+    disponible: 0,
+
+    ocupada: 0,
+
+    alta: 0,
+
+    limpieza: 0,
+
+    aislamiento: 0,
+
+    bloqueada: 0
+
+};
+
+/*
+ * RECORRER UNIDADES
+ */
+
+unidades.forEach(
+    function(unidad) {
+
+        /*
+        =========================================
+        CONTADORES DE LA UNIDAD
+        =========================================
+        */
+
+        let camasOcupadas = 0;
+
+        let camasDisponibles = 0;
+
+        let camasAlta = 0;
+
+        let camasAislamiento = 0;
+
+        let camasLimpieza = 0;
+
+        let camasBloqueadas = 0;
+
+        const camasTotales =
+            unidad.habitaciones.length *
+            2;
+
+        /*
+        =========================================
+        RECORRER HABITACIONES
+        =========================================
+        */
+
+        unidad.habitaciones.forEach(
+            function(numero) {
+
+                ["A", "B"].forEach(
+                    function(letra) {
+
+                        const datos =
+                            obtenerDatosCama(
+                                numero,
+                                letra
+                            );
+
+                        /*
+                         * OCUPADA
+                         *
+                         * IMPORTANTE:
+                         *
+                         * Alta prevista NO elimina
+                         * esta cama del contador.
+                         */
+
+                        if (
+                            datos.ocupada
+                        ) {
+
+                            camasOcupadas++;
+
+                            contadores.ocupada++;
+
+                        }
+
+                        /*
+                         * DISPONIBLE
+                         *
+                         * Una cama ocupada nunca
+                         * se cuenta como disponible.
+                         */
+
+                        if (
+                            datos.estado === 0 &&
+                            !datos.ocupada
+                        ) {
+
+                            camasDisponibles++;
+
+                            contadores.disponible++;
+
+                        }
+
+                        /*
+                         * ALTA PREVISTA
+                         *
+                         * Puede coincidir con ocupada.
+                         */
+
+                        if (
+                            datos.altaPrevista
+                        ) {
+
+                            camasAlta++;
+
+                            contadores.alta++;
+
+                        }
+
+                        /*
+                         * AISLAMIENTO
+                         *
+                         * Una cama cuenta una sola vez
+                         * aunque tenga 2, 3 o más tipos
+                         * de aislamiento.
+                         */
+
+                        if (
+                            Array.isArray(
+                                datos.aislamientos
+                            ) &&
+                            datos.aislamientos.length > 0
+                        ) {
+
+                            camasAislamiento++;
+
+                            contadores.aislamiento++;
+
+                        }
+
+                        /*
+                         * LIMPIEZA
+                         */
+
+                        if (
+                            datos.estado === 3
+                        ) {
+
+                            camasLimpieza++;
+
+                            contadores.limpieza++;
+
+                        }
+
+                        /*
+                         * BLOQUEADA
+                         */
+
+                        if (
+                            datos.estado === 5
+                        ) {
+
+                            camasBloqueadas++;
+
+                            contadores.bloqueada++;
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+        /*
+        =========================================
+        CREAR UNIDAD
+        =========================================
+        */
+
+        const bloque =
+            document.createElement(
+                "section"
+            );
+
+        bloque.className =
+            "unidad";
+
+        /*
+        =========================================
+        CABECERA UNIDAD
+        =========================================
+        */
+
+        const cabecera =
+            document.createElement(
+                "div"
+            );
+
+        cabecera.className =
+            "unidad-cabecera";
+
+        const titulo =
+            document.createElement(
+                "h2"
+            );
+
+        titulo.textContent =
+            unidad.nombre;
+
+        const informacion =
+            document.createElement(
+                "div"
+            );
+
+        informacion.className =
+            "estadisticas-unidad";
+
+        informacion.innerHTML = `
+
+            <span
+                class="estadistica estadistica-ocupada">
+
+                🔵 ${camasOcupadas}
+                ocupadas
+
+            </span>
+
+            <span
+                class="estadistica estadistica-disponible">
+
+                🟢 ${camasDisponibles}
+                disponibles
+
+            </span>
+
+            <span
+                class="estadistica estadistica-alta">
+
+                🟡 ${camasAlta}
+                altas
+
+            </span>
+
+            <span
+                class="estadistica estadistica-aislamiento">
+
+                🟣 ${camasAislamiento}
+                aislamiento
+
+            </span>
+
+            <span
+                class="estadistica estadistica-limpieza">
+
+                🟠 ${camasLimpieza}
+                limpieza
+
+            </span>
+
+            <span
+                class="estadistica estadistica-bloqueada">
+
+                🔴 ${camasBloqueadas}
+                bloqueadas
+
+            </span>
+
+            <span
+                class="estadistica estadistica-total">
+
+                ⚪ ${camasTotales}
+                camas
+
+            </span>
+
+            <span
+                class="estadistica estadistica-ratio">
+
+                👤 Ratio: ${unidad.ratio}
+
+            </span>
+
+        `;
+
+        cabecera.appendChild(
+            titulo
+        );
+
+        cabecera.appendChild(
+            informacion
+        );
+
+        bloque.appendChild(
+            cabecera
+        );
+
+        /*
+        =========================================
+        HABITACIONES
+        =========================================
+        */
+
+        const habitaciones =
+            document.createElement(
+                "div"
+            );
+
+        habitaciones.className =
+            "habitaciones";
+
+        unidad.habitaciones.forEach(
+            function(numero) {
+
+                const habitacion =
+                    document.createElement(
+                        "div"
+                    );
+
+                habitacion.className =
+                    "habitacion";
+
+                const numeroElemento =
+                    document.createElement(
+                        "div"
+                    );
+
+                numeroElemento.className =
+                    "numero";
+
+                numeroElemento.textContent =
+                    "Habitación " +
+                    numero;
+
+                habitacion.appendChild(
+                    numeroElemento
+                );
+
+                const camas =
+                    document.createElement(
+                        "div"
+                    );
+
+                camas.className =
+                    "camas";
+
+                camas.appendChild(
+                    crearCama(
+                        numero,
+                        "A"
+                    )
+                );
+
+                camas.appendChild(
+                    crearCama(
+                        numero,
+                        "B"
+                    )
+                );
+
+                habitacion.appendChild(
+                    camas
+                );
+
+                habitaciones.appendChild(
+                    habitacion
+                );
+
+            }
+        );
+
+        bloque.appendChild(
+            habitaciones
+        );
+
+        hospital.appendChild(
+            bloque
+        );
+
+    }
+);
+
+/*
+=========================================
+ACTUALIZAR RESUMEN GENERAL
+=========================================
+*/
+
+document.getElementById(
+    "cantidadDisponible"
+).textContent =
+    contadores.disponible;
+
+document.getElementById(
+    "cantidadOcupada"
+).textContent =
+    contadores.ocupada;
+
+document.getElementById(
+    "cantidadAlta"
+).textContent =
+    contadores.alta;
+
+document.getElementById(
+    "cantidadLimpieza"
+).textContent =
+    contadores.limpieza;
+
+document.getElementById(
+    "cantidadAislamiento"
+).textContent =
+    contadores.aislamiento;
+
+document.getElementById(
+    "cantidadBloqueada"
+).textContent =
+    contadores.bloqueada;
+
+}
+
+/* =====================================================
+INICIAR APLICACIÓN
 ===================================================== */
 
 dibujarHospital();
 
-</script>
-
-</body>
-</html>
+</script> </body> </html>
