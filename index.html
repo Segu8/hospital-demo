@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+   content="width=device-width, initial-scale=1.0">
 
 <title>Hospital Demo - Gestión de camas</title>
 
 <style>
+
+/* =====================================================
+   ESTILOS GENERALES
+===================================================== */
 
 * {
     box-sizing: border-box;
@@ -20,9 +28,10 @@ body {
     color: #263238;
 }
 
-/* =========================
+
+/* =====================================================
    CABECERA
-========================= */
+===================================================== */
 
 header {
     background: #173f5f;
@@ -30,10 +39,8 @@ header {
     padding: 18px 25px;
 
     display: flex;
-    justify-content: space-between;
     align-items: center;
 
-    flex-wrap: wrap;
     gap: 15px;
 }
 
@@ -53,23 +60,10 @@ header {
     font-size: 13px;
 }
 
-.turno {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
 
-.turno select {
-    padding: 9px 15px;
-    border: none;
-    border-radius: 8px;
-    font-size: 15px;
-    cursor: pointer;
-}
-
-/* =========================
+/* =====================================================
    CONTENEDOR
-========================= */
+===================================================== */
 
 .contenedor {
     max-width: 1500px;
@@ -77,17 +71,22 @@ header {
     padding: 20px;
 }
 
-/* =========================
+
+/* =====================================================
    LEYENDA
-========================= */
+===================================================== */
 
 .leyenda {
     background: white;
+
     padding: 15px 20px;
+
     border-radius: 12px;
+
     margin-bottom: 20px;
 
-    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.08);
 }
 
 .leyenda h3 {
@@ -104,18 +103,23 @@ header {
     display: flex;
     align-items: center;
     gap: 7px;
+
     font-size: 13px;
 }
 
 .punto {
     width: 18px;
     height: 18px;
+
     border-radius: 50%;
+
+    display: inline-block;
 }
 
-/* =========================
+
+/* =====================================================
    COLORES DE ESTADO
-========================= */
+===================================================== */
 
 .verde {
     background: #20a447;
@@ -141,29 +145,40 @@ header {
     background: #d93636;
 }
 
-/* =========================
-   RESUMEN
-========================= */
+
+/* =====================================================
+   RESUMEN GENERAL
+===================================================== */
 
 .resumen {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+
+    grid-template-columns:
+        repeat(6, 1fr);
+
     gap: 10px;
+
     margin-bottom: 25px;
 }
 
 .resumen-item {
     background: white;
+
     border-radius: 10px;
+
     padding: 12px;
+
     text-align: center;
 
-    box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.07);
 }
 
 .resumen-numero {
     display: block;
+
     font-size: 25px;
+
     font-weight: bold;
 }
 
@@ -171,47 +186,61 @@ header {
     font-size: 12px;
 }
 
-/* =========================
+
+/* =====================================================
    UNIDAD
-========================= */
+===================================================== */
 
 .unidad {
     background: white;
+
     border-radius: 14px;
 
     margin-bottom: 25px;
+
     padding: 18px;
 
-    box-shadow: 0 3px 10px rgba(0,0,0,.08);
+    box-shadow:
+        0 3px 10px rgba(0,0,0,.08);
 }
 
 .unidad-cabecera {
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 
-    border-bottom: 1px solid #e2e7eb;
+    border-bottom:
+        1px solid #e2e7eb;
 
     padding-bottom: 12px;
+
     margin-bottom: 15px;
 
     flex-wrap: wrap;
+
     gap: 10px;
 }
 
 .unidad-cabecera h2 {
     margin: 0;
+
     color: #173f5f;
 }
 
 .info-unidad {
     color: #607d8b;
+
     font-size: 14px;
+
+    text-align: right;
 }
 
-/* =========================
+
+/* =====================================================
    HABITACIONES
-========================= */
+===================================================== */
 
 .habitaciones {
     display: grid;
@@ -242,37 +271,41 @@ header {
     margin-bottom: 8px;
 }
 
-/* =========================
+
+/* =====================================================
    CAMAS
-========================= */
+===================================================== */
 
 .camas {
     display: flex;
+
     gap: 7px;
 }
 
 .cama {
     flex: 1;
 
-    min-height: 100px;
+    min-height: 82px;
 
     border-radius: 8px;
 
     color: white;
 
     display: flex;
+
     flex-direction: column;
 
     justify-content: center;
-    align-items: center;
 
-    position: relative;
+    align-items: center;
 
     cursor: pointer;
 
     transition: .15s;
 
     user-select: none;
+
+    position: relative;
 
     padding: 6px;
 }
@@ -286,84 +319,171 @@ header {
 
 .cama-letra {
     font-size: 12px;
+
     opacity: .9;
 }
 
 .cama-estado {
-    font-size: 11px;
+    font-size: 10px;
 
-    margin-top: 4px;
+    margin-top: 3px;
 
     text-align: center;
 }
 
-/* =========================
-   ICONOS DE PACIENTE
-========================= */
 
-.iconos-cama {
+/* =====================================================
+   ICONOS DE PACIENTE
+===================================================== */
+
+.iconos {
     display: flex;
+
     flex-wrap: wrap;
 
     justify-content: center;
+
     align-items: center;
 
     gap: 3px;
 
     margin-top: 5px;
 
-    min-height: 22px;
+    min-height: 20px;
 }
 
-.icono-paciente {
-    background: rgba(255,255,255,.92);
-
-    color: #263238;
-
-    border-radius: 5px;
-
-    padding: 2px 4px;
-
-    font-size: 15px;
+.icono {
+    font-size: 16px;
 
     line-height: 18px;
 
-    cursor: help;
+    cursor: pointer;
+
+    filter: drop-shadow(
+        0 1px 1px rgba(0,0,0,.25)
+    );
 }
 
-/* BOTÓN DE CONFIGURACIÓN */
+.icono:hover {
+    transform: scale(1.15);
+}
 
-.boton-config {
-    position: absolute;
 
-    top: 4px;
-    right: 4px;
+/* =====================================================
+   PANEL DE OPCIONES
+===================================================== */
 
-    width: 22px;
-    height: 22px;
+.panel-opciones {
+    position: fixed;
 
-    border: none;
+    z-index: 9999;
 
-    border-radius: 50%;
+    background: white;
 
-    background: rgba(255,255,255,.85);
+    width: 300px;
+
+    max-width: calc(100vw - 20px);
+
+    max-height: 85vh;
+
+    overflow-y: auto;
+
+    border-radius: 14px;
+
+    padding: 18px;
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.30);
+
+    color: #263238;
+}
+
+.panel-opciones h3 {
+    margin-top: 0;
+
+    color: #173f5f;
+
+    font-size: 18px;
+}
+
+.panel-titulo {
+    font-weight: bold;
+
+    margin-bottom: 12px;
+
+    color: #607d8b;
+}
+
+.opcion {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 9px;
+
+    margin-bottom: 6px;
+
+    border-radius: 8px;
+
+    background: #f3f6f8;
 
     cursor: pointer;
 
+    font-size: 14px;
+}
+
+.opcion:hover {
+    background: #e6edf1;
+}
+
+.opcion input {
+    width: 18px;
+
+    height: 18px;
+
+    cursor: pointer;
+}
+
+.subopciones {
+    margin: 5px 0 12px 27px;
+}
+
+.subopcion {
+    display: block;
+
+    margin: 7px 0;
+
     font-size: 13px;
-
-    padding: 0;
-
-    z-index: 5;
 }
 
-.boton-config:hover {
-    background: white;
+.boton-cerrar {
+    width: 100%;
+
+    border: none;
+
+    border-radius: 8px;
+
+    padding: 10px;
+
+    background: #173f5f;
+
+    color: white;
+
+    cursor: pointer;
+
+    margin-top: 8px;
 }
 
-/* =========================
+.boton-cerrar:hover {
+    background: #0d3049;
+}
+
+
+/* =====================================================
    PIE
-========================= */
+===================================================== */
 
 .pie {
     text-align: center;
@@ -375,195 +495,35 @@ header {
     padding: 20px;
 }
 
-/* =========================
-   VENTANA DE CONFIGURACIÓN
-========================= */
 
-.modal-fondo {
-    position: fixed;
-
-    inset: 0;
-
-    background: rgba(0,0,0,.55);
-
-    display: none;
-
-    justify-content: center;
-    align-items: center;
-
-    padding: 20px;
-
-    z-index: 1000;
-}
-
-.modal-fondo.visible {
-    display: flex;
-}
-
-.modal {
-    background: white;
-
-    width: 100%;
-    max-width: 500px;
-
-    max-height: 90vh;
-
-    overflow-y: auto;
-
-    border-radius: 15px;
-
-    padding: 22px;
-
-    box-shadow: 0 10px 40px rgba(0,0,0,.3);
-}
-
-.modal h2 {
-    margin-top: 0;
-
-    color: #173f5f;
-}
-
-.modal-subtitulo {
-    color: #607d8b;
-
-    font-size: 14px;
-
-    margin-bottom: 20px;
-}
-
-.opcion {
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    padding: 10px;
-
-    border-radius: 8px;
-
-    margin-bottom: 7px;
-
-    background: #f4f7f9;
-
-    cursor: pointer;
-}
-
-.opcion:hover {
-    background: #e9eef2;
-}
-
-.opcion input {
-    width: 18px;
-    height: 18px;
-
-    cursor: pointer;
-}
-
-.opcion-icono {
-    font-size: 22px;
-
-    width: 32px;
-
-    text-align: center;
-}
-
-.opcion-texto {
-    flex: 1;
-
-    font-size: 14px;
-}
-
-.grupo-titulo {
-    color: #173f5f;
-
-    font-weight: bold;
-
-    margin-top: 18px;
-
-    margin-bottom: 8px;
-
-    border-bottom: 1px solid #ddd;
-
-    padding-bottom: 5px;
-}
-
-.aislamiento-tipo {
-    margin-top: 8px;
-
-    margin-left: 30px;
-}
-
-.aislamiento-tipo select {
-    width: 100%;
-
-    padding: 9px;
-
-    border-radius: 7px;
-
-    border: 1px solid #ccd5db;
-
-    font-size: 14px;
-}
-
-.botones-modal {
-    display: flex;
-
-    justify-content: flex-end;
-
-    gap: 10px;
-
-    margin-top: 20px;
-}
-
-.boton-modal {
-    border: none;
-
-    border-radius: 8px;
-
-    padding: 10px 18px;
-
-    cursor: pointer;
-
-    font-size: 14px;
-}
-
-.boton-cancelar {
-    background: #e5e9ec;
-
-    color: #37474f;
-}
-
-.boton-guardar {
-    background: #173f5f;
-
-    color: white;
-}
-
-.boton-guardar:hover {
-    background: #0d3049;
-}
-
-/* =========================
+/* =====================================================
    RESPONSIVE
-========================= */
+===================================================== */
 
 @media (max-width: 900px) {
 
     .resumen {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+    .info-unidad {
+        text-align: left;
     }
 
 }
 
+
 @media (max-width: 600px) {
 
     .resumen {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
     .habitaciones {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
     header {
@@ -575,7 +535,7 @@ header {
     }
 
     .cama {
-        min-height: 105px;
+        min-height: 90px;
     }
 
 }
@@ -585,6 +545,10 @@ header {
 </head>
 
 <body>
+
+<!-- =====================================================
+     CABECERA
+===================================================== -->
 
 <header>
 
@@ -606,40 +570,15 @@ header {
     </div>
 
 </div>
-
-
-<div class="turno">
-
-    <label for="selectorTurno">
-        Turno:
-    </label>
-
-    <select id="selectorTurno">
-
-        <option value="Noche">
-            Noche
-        </option>
-
-        <option value="Mañana">
-            Mañana
-        </option>
-
-        <option value="Tarde">
-            Tarde
-        </option>
-
-    </select>
-
-</div>
 ```
 
 </header>
 
 <div class="contenedor">
 
-<!-- =========================
+<!-- =====================================================
      LEYENDA
-========================= -->
+===================================================== -->
 
 <div class="leyenda">
 
@@ -685,96 +624,114 @@ header {
 
 </div>
 
-<!-- =========================
-     RESUMEN
-========================= -->
+<!-- =====================================================
+     RESUMEN GENERAL
+===================================================== -->
 
 <div class="resumen">
 
 ```
 <div class="resumen-item">
-    <span id="cantidadDisponible"
-          class="resumen-numero"
-          style="color:#20a447;">
+
+    <span
+        id="cantidadDisponible"
+        class="resumen-numero"
+        style="color:#20a447;">
         0
     </span>
 
     <span class="resumen-texto">
         Disponibles
     </span>
+
 </div>
 
 
 <div class="resumen-item">
-    <span id="cantidadOcupada"
-          class="resumen-numero"
-          style="color:#2878d4;">
+
+    <span
+        id="cantidadOcupada"
+        class="resumen-numero"
+        style="color:#2878d4;">
         0
     </span>
 
     <span class="resumen-texto">
         Ocupadas
     </span>
+
 </div>
 
 
 <div class="resumen-item">
-    <span id="cantidadAlta"
-          class="resumen-numero"
-          style="color:#c49b00;">
+
+    <span
+        id="cantidadAlta"
+        class="resumen-numero"
+        style="color:#c49b00;">
         0
     </span>
 
     <span class="resumen-texto">
         Alta prevista
     </span>
+
 </div>
 
 
 <div class="resumen-item">
-    <span id="cantidadLimpieza"
-          class="resumen-numero"
-          style="color:#f28c28;">
+
+    <span
+        id="cantidadLimpieza"
+        class="resumen-numero"
+        style="color:#f28c28;">
         0
     </span>
 
     <span class="resumen-texto">
         Limpieza
     </span>
+
 </div>
 
 
 <div class="resumen-item">
-    <span id="cantidadAislamiento"
-          class="resumen-numero"
-          style="color:#8e44ad;">
+
+    <span
+        id="cantidadAislamiento"
+        class="resumen-numero"
+        style="color:#8e44ad;">
         0
     </span>
 
     <span class="resumen-texto">
         Aislamiento
     </span>
+
 </div>
 
 
 <div class="resumen-item">
-    <span id="cantidadBloqueada"
-          class="resumen-numero"
-          style="color:#d93636;">
+
+    <span
+        id="cantidadBloqueada"
+        class="resumen-numero"
+        style="color:#d93636;">
         0
     </span>
 
     <span class="resumen-texto">
         Bloqueadas
     </span>
+
 </div>
 ```
 
 </div>
 
-<!-- =========================
+<!-- =====================================================
      HOSPITAL
-========================= -->
+===================================================== -->
 
 <div id="hospital"></div>
 
@@ -788,246 +745,12 @@ Hospital Demo · Gestión visual de camas · Sin datos de pacientes
 
 </div>
 
-<!-- =========================
-     VENTANA DE CONFIGURACIÓN
-========================= -->
-
-<div id="modalFondo" class="modal-fondo">
-
-```
-<div class="modal">
-
-    <h2 id="tituloModal">
-        Características del paciente
-    </h2>
-
-    <div class="modal-subtitulo">
-        Selecciona las características que quieras mostrar en esta cama.
-        Puedes seleccionar varias.
-    </div>
-
-
-    <!-- AISLAMIENTO -->
-
-    <div class="grupo-titulo">
-        🟣 Aislamiento
-    </div>
-
-    <label class="opcion">
-
-        <input
-            type="checkbox"
-            id="checkAislamiento"
-            onchange="actualizarAislamiento()">
-
-        <span class="opcion-icono">
-            🟣
-        </span>
-
-        <span class="opcion-texto">
-            Paciente en aislamiento
-        </span>
-
-    </label>
-
-
-    <div
-        id="contenedorAislamiento"
-        class="aislamiento-tipo"
-        style="display:none;">
-
-        <select id="tipoAislamiento">
-
-            <option value="">
-                Seleccionar tipo de aislamiento
-            </option>
-
-            <option value="Aéreo / gotas">
-                💨 Aéreo / gotas
-            </option>
-
-            <option value="Contacto">
-                🤝 Contacto
-            </option>
-
-            <option value="Psiquiátrico">
-                🧠 Psiquiátrico
-            </option>
-
-            <option value="Compasivo">
-                ❤️ Compasivo
-            </option>
-
-            <option value="Inverso">
-                🔄 Inverso
-            </option>
-
-        </select>
-
-    </div>
-
-
-
-    <!-- SEGURIDAD -->
-
-    <div class="grupo-titulo">
-        ⚠️ Seguridad
-    </div>
-
-    <label class="opcion">
-
-        <input
-            type="checkbox"
-            id="checkContencion">
-
-        <span class="opcion-icono">
-            ⛓️
-        </span>
-
-        <span class="opcion-texto">
-            Contención mecánica
-        </span>
-
-    </label>
-
-
-    <label class="opcion">
-
-        <input
-            type="checkbox"
-            id="checkDesorientado">
-
-        <span class="opcion-icono">
-            ⚠️
-        </span>
-
-        <span class="opcion-texto">
-            Desorientación / riesgo de caídas
-        </span>
-
-    </label>
-
-
-
-    <!-- CIRUGÍA -->
-
-    <div class="grupo-titulo">
-        🩺 Intervención quirúrgica
-    </div>
-
-    <label class="opcion">
-
-        <input
-            type="checkbox"
-            id="checkCirugia24">
-
-        <span class="opcion-icono">
-            🩺
-        </span>
-
-        <span class="opcion-texto">
-            Intervenido hace menos de 24 h
-        </span>
-
-    </label>
-
-
-    <label class="opcion">
-
-        <input
-            type="checkbox"
-            id="checkCirugia48">
-
-        <span class="opcion-icono">
-            🩹
-        </span>
-
-        <span class="opcion-texto">
-            Intervenido entre 24 y 48 h
-        </span>
-
-    </label>
-
-
-
-    <!-- TRATAMIENTOS -->
-
-    <div class="grupo-titulo">
-        🏥 Tratamientos / dispositivos
-    </div>
-
-    <label class="opcion">
-
-        <input
-            type="checkbox"
-            id="checkVMNI">
-
-        <span class="opcion-icono">
-            😷
-        </span>
-
-        <span class="opcion-texto">
-            VMNI · Ventilación mecánica no invasiva
-        </span>
-
-    </label>
-
-
-    <label class="opcion">
-
-        <input
-            type="checkbox"
-            id="checkLavado">
-
-        <span class="opcion-icono">
-            💧
-        </span>
-
-        <span class="opcion-texto">
-            Lavado vesical
-        </span>
-
-    </label>
-
-
-
-    <!-- BOTONES -->
-
-    <div class="botones-modal">
-
-        <button
-            class="boton-modal boton-cancelar"
-            onclick="cerrarModal()">
-
-            Cancelar
-
-        </button>
-
-
-        <button
-            class="boton-modal boton-guardar"
-            onclick="guardarCaracteristicas()">
-
-            Guardar
-
-        </button>
-
-    </div>
-
-</div>
-```
-
-</div>
-
 <script>
 
 
-/*
-====================================================
-DATOS DEL HOSPITAL
-====================================================
-*/
-
+/* =====================================================
+   DATOS DEL HOSPITAL
+===================================================== */
 
 const unidades = [
 
@@ -1051,7 +774,7 @@ const unidades = [
             "218","219","220","221","222","223","224"
         ],
 
-        capacidad: "28 camas · máximo 27 pacientes"
+        capacidad: "28 camas"
     },
 
 
@@ -1064,7 +787,7 @@ const unidades = [
             "319","320","321","322","323","324"
         ],
 
-        capacidad: "44 camas · máximo 35 pacientes"
+        capacidad: "44 camas"
     },
 
 
@@ -1077,7 +800,7 @@ const unidades = [
             "417","418","419","420","421","422","423","424"
         ],
 
-        capacidad: "48 camas · máximo 36 pacientes"
+        capacidad: "48 camas"
     },
 
 
@@ -1095,12 +818,9 @@ const unidades = [
 
 
 
-/*
-====================================================
-ESTADOS DE LAS CAMAS
-====================================================
-*/
-
+/* =====================================================
+   ESTADOS
+===================================================== */
 
 const estados = [
 
@@ -1138,10 +858,37 @@ const estados = [
 
 
 
+/* =====================================================
+   INFORMACIÓN ADICIONAL DE LAS CAMAS
+===================================================== */
+
 /*
-====================================================
-DATOS DE LAS CAMAS
-====================================================
+Cada cama puede tener varios indicadores
+simultáneamente.
+
+aislamiento:
+    aire
+    contacto
+    psiquiatrico
+    compasivo
+    inverso
+
+contencion:
+    true / false
+
+caidas:
+    true / false
+
+postoperatorio:
+    ninguno
+    menos24
+    entre24y48
+
+vmni:
+    true / false
+
+lavado:
+    true / false
 */
 
 
@@ -1153,32 +900,18 @@ let estadoCamas =
     ) || {};
 
 
-let caracteristicasCamas =
+let datosCamas =
     JSON.parse(
         localStorage.getItem(
-            "hospitalDemoCaracteristicas"
+            "hospitalDemoDatos"
         )
     ) || {};
 
 
 
-/*
-====================================================
-CAMA QUE SE ESTÁ EDITANDO
-====================================================
-*/
-
-
-let camaEditando = null;
-
-
-
-/*
-====================================================
-GUARDAR DATOS
-====================================================
-*/
-
+/* =====================================================
+   GUARDAR
+===================================================== */
 
 function guardarDatos() {
 
@@ -1188,29 +921,62 @@ function guardarDatos() {
     );
 
     localStorage.setItem(
-        "hospitalDemoCaracteristicas",
-        JSON.stringify(caracteristicasCamas)
+        "hospitalDemoDatos",
+        JSON.stringify(datosCamas)
     );
 
 }
 
 
 
-/*
-====================================================
-CAMBIAR ESTADO DE COLOR
-====================================================
-*/
+/* =====================================================
+   DATOS POR DEFECTO DE UNA CAMA
+===================================================== */
+
+function obtenerDatosCama(clave) {
+
+    if (!datosCamas[clave]) {
+
+        datosCamas[clave] = {
+
+            aislamiento: "",
+
+            contencion: false,
+
+            caidas: false,
+
+            postoperatorio: "",
+
+            vmni: false,
+
+            lavado: false
+
+        };
+
+    }
+
+    return datosCamas[clave];
+
+}
 
 
-function cambiarEstado(habitacion, cama) {
+
+/* =====================================================
+   CAMBIAR ESTADO DE COLOR
+===================================================== */
+
+function cambiarEstado(
+    habitacion,
+    cama
+) {
 
     const clave =
         habitacion + "-" + cama;
 
 
     if (
-        estadoCamas[clave] === undefined
+        estadoCamas[clave]
+        === undefined
     ) {
 
         estadoCamas[clave] = 0;
@@ -1239,65 +1005,592 @@ function cambiarEstado(habitacion, cama) {
 
 
 
-/*
-====================================================
-ICONOS DE CADA CAMA
-====================================================
-*/
+/* =====================================================
+   ABRIR PANEL DE OPCIONES
+===================================================== */
 
+function abrirOpciones(
+    numero,
+    letra,
+    elemento
+) {
+
+    cerrarPanel();
+
+
+    const clave =
+        numero + "-" + letra;
+
+
+    const datos =
+        obtenerDatosCama(clave);
+
+
+    const panel =
+        document.createElement("div");
+
+
+    panel.className =
+        "panel-opciones";
+
+
+    panel.id =
+        "panelOpciones";
+
+
+    panel.innerHTML = `
+
+        <h3>
+            Cama ${numero} ${letra}
+        </h3>
+
+        <div class="panel-titulo">
+            Indicadores del paciente
+        </div>
+
+
+        <!-- AISLAMIENTO -->
+
+        <label class="opcion">
+
+            <input
+                type="checkbox"
+                id="activarAislamiento"
+                ${datos.aislamiento ? "checked" : ""}
+            >
+
+            🛡️ Aislamiento
+
+        </label>
+
+
+        <div
+            id="subAislamiento"
+            class="subopciones"
+            style="
+                display:
+                ${datos.aislamiento
+                    ? "block"
+                    : "none"};
+            "
+        >
+
+            <label class="subopcion">
+
+                <input
+                    type="radio"
+                    name="tipoAislamiento"
+                    value="aire"
+                    ${datos.aislamiento === "aire"
+                        ? "checked"
+                        : ""}
+                >
+
+                🛡️ Aéreo / Gotas
+
+            </label>
+
+
+            <label class="subopcion">
+
+                <input
+                    type="radio"
+                    name="tipoAislamiento"
+                    value="contacto"
+                    ${datos.aislamiento === "contacto"
+                        ? "checked"
+                        : ""}
+                >
+
+                🧤 Contacto
+
+            </label>
+
+
+            <label class="subopcion">
+
+                <input
+                    type="radio"
+                    name="tipoAislamiento"
+                    value="psiquiatrico"
+                    ${datos.aislamiento === "psiquiatrico"
+                        ? "checked"
+                        : ""}
+                >
+
+                🧠 Psiquiátrico
+
+            </label>
+
+
+            <label class="subopcion">
+
+                <input
+                    type="radio"
+                    name="tipoAislamiento"
+                    value="compasivo"
+                    ${datos.aislamiento === "compasivo"
+                        ? "checked"
+                        : ""}
+                >
+
+                ❤️ Compasivo
+
+            </label>
+
+
+            <label class="subopcion">
+
+                <input
+                    type="radio"
+                    name="tipoAislamiento"
+                    value="inverso"
+                    ${datos.aislamiento === "inverso"
+                        ? "checked"
+                        : ""}
+                >
+
+                🧬 Inverso
+
+            </label>
+
+        </div>
+
+
+        <!-- CONTENCIÓN -->
+
+        <label class="opcion">
+
+            <input
+                type="checkbox"
+                id="activarContencion"
+                ${datos.contencion
+                    ? "checked"
+                    : ""}
+            >
+
+            ⛓️ Contención mecánica
+
+        </label>
+
+
+        <!-- RIESGO DE CAÍDA -->
+
+        <label class="opcion">
+
+            <input
+                type="checkbox"
+                id="activarCaidas"
+                ${datos.caidas
+                    ? "checked"
+                    : ""}
+            >
+
+            ⚠️ Riesgo de caídas / desorientación
+
+        </label>
+
+
+        <!-- POSTOPERATORIO -->
+
+        <div
+            class="panel-titulo"
+            style="margin-top:14px;"
+        >
+            Postoperatorio
+        </div>
+
+
+        <label class="opcion">
+
+            <input
+                type="radio"
+                name="postoperatorio"
+                value=""
+                ${!datos.postoperatorio
+                    ? "checked"
+                    : ""}
+            >
+
+            Ninguno
+
+        </label>
+
+
+        <label class="opcion">
+
+            <input
+                type="radio"
+                name="postoperatorio"
+                value="menos24"
+                ${datos.postoperatorio === "menos24"
+                    ? "checked"
+                    : ""}
+            >
+
+            🩹 Menos de 24 h
+
+        </label>
+
+
+        <label class="opcion">
+
+            <input
+                type="radio"
+                name="postoperatorio"
+                value="entre24y48"
+                ${datos.postoperatorio === "entre24y48"
+                    ? "checked"
+                    : ""}
+            >
+
+            🩹 24–48 h
+
+        </label>
+
+
+        <!-- VMNI -->
+
+        <label class="opcion">
+
+            <input
+                type="checkbox"
+                id="activarVmni"
+                ${datos.vmni
+                    ? "checked"
+                    : ""}
+            >
+
+            😷 VMNI
+
+        </label>
+
+
+        <!-- LAVADO -->
+
+        <label class="opcion">
+
+            <input
+                type="checkbox"
+                id="activarLavado"
+                ${datos.lavado
+                    ? "checked"
+                    : ""}
+            >
+
+            💧 Lavado vesical
+
+        </label>
+
+
+        <button
+            class="boton-cerrar"
+            id="guardarOpciones"
+        >
+            Guardar
+        </button>
+
+    `;
+
+
+    document.body.appendChild(panel);
+
+
+    /* =================================================
+       POSICIONAR PANEL
+    ================================================= */
+
+    const rect =
+        elemento.getBoundingClientRect();
+
+
+    let left =
+        rect.left;
+
+
+    let top =
+        rect.bottom + 8;
+
+
+    if (
+        left + 300
+        > window.innerWidth
+    ) {
+
+        left =
+            window.innerWidth - 310;
+
+    }
+
+
+    if (
+        top + 500
+        > window.innerHeight
+    ) {
+
+        top =
+            Math.max(
+                10,
+                rect.top - 500
+            );
+
+    }
+
+
+    panel.style.left =
+        Math.max(10, left) + "px";
+
+
+    panel.style.top =
+        Math.max(10, top) + "px";
+
+
+
+    /* =================================================
+       ACTIVAR / DESACTIVAR AISLAMIENTO
+    ================================================= */
+
+    const checkboxAislamiento =
+        document.getElementById(
+            "activarAislamiento"
+        );
+
+
+    const subAislamiento =
+        document.getElementById(
+            "subAislamiento"
+        );
+
+
+    checkboxAislamiento
+        .addEventListener(
+            "change",
+            function() {
+
+                if (this.checked) {
+
+                    subAislamiento
+                        .style.display =
+                        "block";
+
+                } else {
+
+                    subAislamiento
+                        .style.display =
+                        "none";
+
+                    datos.aislamiento =
+                        "";
+
+                }
+
+            }
+        );
+
+
+
+    /* =================================================
+       GUARDAR OPCIONES
+    ================================================= */
+
+    document
+        .getElementById(
+            "guardarOpciones"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+
+                /* AISLAMIENTO */
+
+                if (
+                    checkboxAislamiento
+                    .checked
+                ) {
+
+                    const seleccionado =
+                        document.querySelector(
+                            'input[name="tipoAislamiento"]:checked'
+                        );
+
+
+                    if (seleccionado) {
+
+                        datos.aislamiento =
+                            seleccionado.value;
+
+                    }
+
+                } else {
+
+                    datos.aislamiento =
+                        "";
+
+                }
+
+
+
+                /* CONTENCIÓN */
+
+                datos.contencion =
+                    document.getElementById(
+                        "activarContencion"
+                    ).checked;
+
+
+
+                /* CAÍDAS */
+
+                datos.caidas =
+                    document.getElementById(
+                        "activarCaidas"
+                    ).checked;
+
+
+
+                /* POSTOPERATORIO */
+
+                const postoperatorio =
+                    document.querySelector(
+                        'input[name="postoperatorio"]:checked'
+                    );
+
+
+                datos.postoperatorio =
+                    postoperatorio
+                        ? postoperatorio.value
+                        : "";
+
+
+
+                /* VMNI */
+
+                datos.vmni =
+                    document.getElementById(
+                        "activarVmni"
+                    ).checked;
+
+
+
+                /* LAVADO */
+
+                datos.lavado =
+                    document.getElementById(
+                        "activarLavado"
+                    ).checked;
+
+
+
+                datosCamas[clave] =
+                    datos;
+
+
+                guardarDatos();
+
+                cerrarPanel();
+
+                dibujarHospital();
+
+            }
+        );
+
+}
+
+
+
+/* =====================================================
+   CERRAR PANEL
+===================================================== */
+
+function cerrarPanel() {
+
+    const panel =
+        document.getElementById(
+            "panelOpciones"
+        );
+
+
+    if (panel) {
+
+        panel.remove();
+
+    }
+
+}
+
+
+
+/* =====================================================
+   CREAR ICONOS
+===================================================== */
 
 function obtenerIconos(datos) {
 
     let iconos = [];
 
 
-    if (
-        datos.aislamiento &&
-        datos.tipoAislamiento
-    ) {
+    /* AISLAMIENTO */
 
-        const iconosAislamiento = {
+    if (datos.aislamiento) {
 
-            "Aéreo / gotas": "💨",
+        let icono =
+            "🛡️";
 
-            "Contacto": "🤝",
 
-            "Psiquiátrico": "🧠",
+        if (
+            datos.aislamiento
+            === "contacto"
+        ) {
 
-            "Compasivo": "❤️",
+            icono = "🧤";
 
-            "Inverso": "🔄"
+        }
 
-        };
+        if (
+            datos.aislamiento
+            === "psiquiatrico"
+        ) {
+
+            icono = "🧠";
+
+        }
+
+        if (
+            datos.aislamiento
+            === "compasivo"
+        ) {
+
+            icono = "❤️";
+
+        }
+
+        if (
+            datos.aislamiento
+            === "inverso"
+        ) {
+
+            icono = "🧬";
+
+        }
 
 
         iconos.push({
 
-            icono:
-                iconosAislamiento[
-                    datos.tipoAislamiento
-                ] || "🟣",
+            icono: icono,
 
-            texto:
+            titulo:
                 "Aislamiento: "
-                + datos.tipoAislamiento
-
-        });
-
-    } else if (
-        datos.aislamiento
-    ) {
-
-        iconos.push({
-
-            icono: "🟣",
-
-            texto: "Aislamiento"
+                + nombreAislamiento(
+                    datos.aislamiento
+                )
 
         });
 
     }
 
+
+    /* CONTENCIÓN */
 
     if (datos.contencion) {
 
@@ -1305,54 +1598,67 @@ function obtenerIconos(datos) {
 
             icono: "⛓️",
 
-            texto: "Contención mecánica"
+            titulo:
+                "Contención mecánica"
 
         });
 
     }
 
 
-    if (datos.desorientado) {
+    /* RIESGO DE CAÍDA */
+
+    if (datos.caidas) {
 
         iconos.push({
 
             icono: "⚠️",
 
-            texto:
-                "Desorientación / riesgo de caídas"
+            titulo:
+                "Riesgo de caídas / desorientación"
 
         });
 
     }
 
 
-    if (datos.cirugia24) {
+    /* POSTOPERATORIO */
 
-        iconos.push({
-
-            icono: "🩺",
-
-            texto:
-                "Intervenido hace menos de 24 h"
-
-        });
-
-    }
-
-
-    if (datos.cirugia48) {
+    if (
+        datos.postoperatorio
+        === "menos24"
+    ) {
 
         iconos.push({
 
             icono: "🩹",
 
-            texto:
-                "Intervenido entre 24 y 48 h"
+            titulo:
+                "Postoperatorio < 24 h"
 
         });
 
     }
 
+
+    if (
+        datos.postoperatorio
+        === "entre24y48"
+    ) {
+
+        iconos.push({
+
+            icono: "🩹⏱️",
+
+            titulo:
+                "Postoperatorio 24–48 h"
+
+        });
+
+    }
+
+
+    /* VMNI */
 
     if (datos.vmni) {
 
@@ -1360,13 +1666,15 @@ function obtenerIconos(datos) {
 
             icono: "😷",
 
-            texto:
-                "VMNI · Ventilación mecánica no invasiva"
+            titulo:
+                "VMNI"
 
         });
 
     }
 
+
+    /* LAVADO VESICAL */
 
     if (datos.lavado) {
 
@@ -1374,7 +1682,7 @@ function obtenerIconos(datos) {
 
             icono: "💧",
 
-            texto:
+            titulo:
                 "Lavado vesical"
 
         });
@@ -1388,262 +1696,42 @@ function obtenerIconos(datos) {
 
 
 
-/*
-====================================================
-ABRIR CONFIGURACIÓN
-====================================================
-*/
+/* =====================================================
+   NOMBRE DEL TIPO DE AISLAMIENTO
+===================================================== */
 
+function nombreAislamiento(tipo) {
 
-function abrirConfiguracion(
-    numero,
-    letra,
-    evento
-) {
+    const nombres = {
 
-    evento.stopPropagation();
+        aire:
+            "Aéreo / Gotas",
 
+        contacto:
+            "Contacto",
 
-    camaEditando =
-        numero + "-" + letra;
+        psiquiatrico:
+            "Psiquiátrico",
 
+        compasivo:
+            "Compasivo",
 
-    const datos =
-        caracteristicasCamas[
-            camaEditando
-        ] || {};
-
-
-    document.getElementById(
-        "tituloModal"
-    ).textContent =
-        "Cama " + letra
-        + " · Habitación "
-        + numero;
-
-
-
-    document.getElementById(
-        "checkAislamiento"
-    ).checked =
-        !!datos.aislamiento;
-
-
-    document.getElementById(
-        "tipoAislamiento"
-    ).value =
-        datos.tipoAislamiento || "";
-
-
-
-    document.getElementById(
-        "checkContencion"
-    ).checked =
-        !!datos.contencion;
-
-
-    document.getElementById(
-        "checkDesorientado"
-    ).checked =
-        !!datos.desorientado;
-
-
-    document.getElementById(
-        "checkCirugia24"
-    ).checked =
-        !!datos.cirugia24;
-
-
-    document.getElementById(
-        "checkCirugia48"
-    ).checked =
-        !!datos.cirugia48;
-
-
-    document.getElementById(
-        "checkVMNI"
-    ).checked =
-        !!datos.vmni;
-
-
-    document.getElementById(
-        "checkLavado"
-    ).checked =
-        !!datos.lavado;
-
-
-
-    actualizarAislamiento();
-
-
-    document.getElementById(
-        "modalFondo"
-    ).classList.add("visible");
-
-}
-
-
-
-/*
-====================================================
-MOSTRAR / OCULTAR TIPO DE AISLAMIENTO
-====================================================
-*/
-
-
-function actualizarAislamiento() {
-
-    const marcado =
-        document.getElementById(
-            "checkAislamiento"
-        ).checked;
-
-
-    document.getElementById(
-        "contenedorAislamiento"
-    ).style.display =
-        marcado ? "block" : "none";
-
-}
-
-
-
-/*
-====================================================
-GUARDAR CARACTERÍSTICAS
-====================================================
-*/
-
-
-function guardarCaracteristicas() {
-
-    if (!camaEditando) {
-
-        return;
-
-    }
-
-
-    const aislamiento =
-        document.getElementById(
-            "checkAislamiento"
-        ).checked;
-
-
-    const tipoAislamiento =
-        document.getElementById(
-            "tipoAislamiento"
-        ).value;
-
-
-
-    caracteristicasCamas[
-        camaEditando
-    ] = {
-
-        aislamiento:
-            aislamiento,
-
-        tipoAislamiento:
-            aislamiento
-            ? tipoAislamiento
-            : "",
-
-
-        contencion:
-            document.getElementById(
-                "checkContencion"
-            ).checked,
-
-
-        desorientado:
-            document.getElementById(
-                "checkDesorientado"
-            ).checked,
-
-
-        cirugia24:
-            document.getElementById(
-                "checkCirugia24"
-            ).checked,
-
-
-        cirugia48:
-            document.getElementById(
-                "checkCirugia48"
-            ).checked,
-
-
-        vmni:
-            document.getElementById(
-                "checkVMNI"
-            ).checked,
-
-
-        lavado:
-            document.getElementById(
-                "checkLavado"
-            ).checked
+        inverso:
+            "Inverso"
 
     };
 
 
-
-    /*
-    Si se marca cirugía <24 h,
-    quitamos 24-48 h para evitar
-    dos estados simultáneos.
-    */
-
-    if (
-        caracteristicasCamas[
-            camaEditando
-        ].cirugia24
-    ) {
-
-        caracteristicasCamas[
-            camaEditando
-        ].cirugia48 = false;
-
-    }
-
-
-
-    guardarDatos();
-
-    cerrarModal();
-
-    dibujarHospital();
+    return nombres[tipo]
+        || "";
 
 }
 
 
 
-/*
-====================================================
-CERRAR MODAL
-====================================================
-*/
-
-
-function cerrarModal() {
-
-    document.getElementById(
-        "modalFondo"
-    ).classList.remove("visible");
-
-    camaEditando = null;
-
-}
-
-
-
-/*
-====================================================
-CREAR UNA CAMA
-====================================================
-*/
-
+/* =====================================================
+   CREAR UNA CAMA
+===================================================== */
 
 function crearCama(
     numero,
@@ -1658,9 +1746,7 @@ function crearCama(
         estadoCamas[clave];
 
 
-    if (
-        estado === undefined
-    ) {
+    if (estado === undefined) {
 
         estado = 0;
 
@@ -1671,16 +1757,12 @@ function crearCama(
         estados[estado];
 
 
-    const datosCaracteristicas =
-        caracteristicasCamas[
-            clave
-        ] || {};
+    const datos =
+        obtenerDatosCama(clave);
 
 
     const elemento =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
 
     elemento.className =
@@ -1688,15 +1770,77 @@ function crearCama(
         + datosEstado.clase;
 
 
+    /* =================================================
+       ICONOS
+    ================================================= */
 
-    /*
-    Click en la cama:
-    cambia el estado/color.
-    */
+    const iconos =
+        obtenerIconos(datos);
+
+
+    let htmlIconos = "";
+
+
+    iconos.forEach(
+        function(item) {
+
+            htmlIconos += `
+
+                <span
+                    class="icono"
+                    title="${item.titulo}"
+                >
+                    ${item.icono}
+                </span>
+
+            `;
+
+        }
+    );
+
+
+    elemento.innerHTML = `
+
+        <span class="cama-letra">
+            Cama ${letra}
+        </span>
+
+        <span class="cama-estado">
+            ${datosEstado.nombre}
+        </span>
+
+        <div class="iconos">
+
+            ${htmlIconos}
+
+        </div>
+
+    `;
+
+
+    /* =================================================
+       CLICK NORMAL = CAMBIAR COLOR
+    ================================================= */
 
     elemento.addEventListener(
         "click",
-        function() {
+        function(e) {
+
+            /*
+            Si se pulsa un icono no cambiamos
+            el estado de la cama.
+            */
+
+            if (
+                e.target.classList.contains(
+                    "icono"
+                )
+            ) {
+
+                return;
+
+            }
+
 
             cambiarEstado(
                 numero,
@@ -1708,168 +1852,25 @@ function crearCama(
 
 
 
-    /*
-    Botón de configuración.
-    */
+    /* =================================================
+       DOBLE CLICK = OPCIONES
+    ================================================= */
 
-    const boton =
-        document.createElement(
-            "button"
-        );
+    elemento.addEventListener(
+        "dblclick",
+        function(e) {
 
-
-    boton.className =
-        "boton-config";
-
-    boton.textContent =
-        "⚙️";
-
-    boton.title =
-        "Editar características";
+            e.preventDefault();
 
 
-    boton.addEventListener(
-        "click",
-        function(evento) {
-
-            abrirConfiguracion(
+            abrirOpciones(
                 numero,
                 letra,
-                evento
+                elemento
             );
 
         }
     );
-
-
-    elemento.appendChild(
-        boton
-    );
-
-
-
-    /*
-    Letra de la cama.
-    */
-
-    const letraElemento =
-        document.createElement(
-            "span"
-        );
-
-
-    letraElemento.className =
-        "cama-letra";
-
-
-    letraElemento.textContent =
-        "Cama " + letra;
-
-
-    elemento.appendChild(
-        letraElemento
-    );
-
-
-
-    /*
-    Estado.
-    */
-
-    const estadoElemento =
-        document.createElement(
-            "span"
-        );
-
-
-    estadoElemento.className =
-        "cama-estado";
-
-
-    estadoElemento.textContent =
-        datosEstado.nombre;
-
-
-    elemento.appendChild(
-        estadoElemento
-    );
-
-
-
-    /*
-    ICONOS.
-    */
-
-    const iconos =
-        obtenerIconos(
-            datosCaracteristicas
-        );
-
-
-    if (
-        iconos.length > 0
-    ) {
-
-        const contenedorIconos =
-            document.createElement(
-                "div"
-            );
-
-
-        contenedorIconos.className =
-            "iconos-cama";
-
-
-        iconos.forEach(
-            function(item) {
-
-                const icono =
-                    document.createElement(
-                        "span"
-                    );
-
-
-                icono.className =
-                    "icono-paciente";
-
-
-                icono.textContent =
-                    item.icono;
-
-
-                icono.title =
-                    item.texto;
-
-
-                /*
-                Evita que pulsar el icono
-                cambie el color de la cama.
-                */
-
-                icono.addEventListener(
-                    "click",
-                    function(evento) {
-
-                        evento.stopPropagation();
-
-                    }
-                );
-
-
-                contenedorIconos.appendChild(
-                    icono
-                );
-
-            }
-        );
-
-
-        elemento.appendChild(
-            contenedorIconos
-        );
-
-    }
-
 
 
     return elemento;
@@ -1878,12 +1879,9 @@ function crearCama(
 
 
 
-/*
-====================================================
-DIBUJAR HOSPITAL
-====================================================
-*/
-
+/* =====================================================
+   DIBUJAR HOSPITAL
+===================================================== */
 
 function dibujarHospital() {
 
@@ -1893,7 +1891,8 @@ function dibujarHospital() {
         );
 
 
-    hospital.innerHTML = "";
+    hospital.innerHTML =
+        "";
 
 
     let contadores = [
@@ -1922,6 +1921,10 @@ function dibujarHospital() {
 
 
 
+            /* =========================================
+               CABECERA UNIDAD
+            ========================================= */
+
             const cabecera =
                 document.createElement(
                     "div"
@@ -1944,12 +1947,74 @@ function dibujarHospital() {
 
 
 
-            const totalHabitaciones =
-                unidad.habitaciones.length;
+            /* =========================================
+               CONTADORES DE LA UNIDAD
+            ========================================= */
+
+            let camasOcupadas = 0;
+
+            let camasDisponibles = 0;
+
+            let totalCamas =
+                unidad.habitaciones.length * 2;
 
 
-            const totalCamas =
-                totalHabitaciones * 2;
+
+            unidad.habitaciones.forEach(
+                function(numero) {
+
+                    ["A","B"].forEach(
+                        function(letra) {
+
+                            const clave =
+                                numero
+                                + "-"
+                                + letra;
+
+
+                            const estado =
+                                estadoCamas[
+                                    clave
+                                ] || 0;
+
+
+                            if (
+                                estado === 0
+                            ) {
+
+                                camasDisponibles++;
+
+                            }
+
+
+                            if (
+                                estado === 1
+                            ) {
+
+                                camasOcupadas++;
+
+                            }
+
+
+                            contadores[
+                                estado
+                            ]++;
+
+                        }
+                    );
+
+                }
+            );
+
+
+
+            /*
+            Ratio:
+            total de camas dividido entre 2
+            */
+
+            const ratio =
+                totalCamas / 2;
 
 
 
@@ -1963,12 +2028,40 @@ function dibujarHospital() {
                 "info-unidad";
 
 
-            informacion.textContent =
-                totalHabitaciones
-                + " habitaciones · "
-                + totalCamas
-                + " camas · "
-                + unidad.capacidad;
+            informacion.innerHTML = `
+
+                ${unidad.habitaciones.length}
+                habitaciones
+                ·
+
+                <strong
+                    style="color:#2878d4;"
+                >
+                    ${camasOcupadas}
+                </strong>
+                ocupadas
+                /
+
+                <strong
+                    style="color:#20a447;"
+                >
+                    ${camasDisponibles}
+                </strong>
+                disponibles
+                ·
+
+                <strong>
+                    ${totalCamas}
+                </strong>
+                camas
+                ·
+
+                Ratio:
+                <strong>
+                    ${ratio}
+                </strong>
+
+            `;
 
 
 
@@ -1987,6 +2080,10 @@ function dibujarHospital() {
             );
 
 
+
+            /* =========================================
+               HABITACIONES
+            ========================================= */
 
             const habitaciones =
                 document.createElement(
@@ -2080,33 +2177,6 @@ function dibujarHospital() {
                         habitacion
                     );
 
-
-
-                    /*
-                    Contabilizar estados.
-                    */
-
-                    const estadoA =
-                        estadoCamas[
-                            numero + "-A"
-                        ] || 0;
-
-
-                    const estadoB =
-                        estadoCamas[
-                            numero + "-B"
-                        ] || 0;
-
-
-                    contadores[
-                        estadoA
-                    ]++;
-
-
-                    contadores[
-                        estadoB
-                    ]++;
-
                 }
             );
 
@@ -2126,9 +2196,9 @@ function dibujarHospital() {
 
 
 
-    /*
-    Actualizar resumen.
-    */
+    /* =================================================
+       RESUMEN GENERAL
+    ================================================= */
 
     document.getElementById(
         "cantidadDisponible"
@@ -2169,69 +2239,50 @@ function dibujarHospital() {
 
 
 
-/*
-====================================================
-SELECTOR DE TURNO
-====================================================
-*/
+/* =====================================================
+   CERRAR PANEL AL HACER CLICK FUERA
+===================================================== */
+
+document.addEventListener(
+    "click",
+    function(e) {
+
+        const panel =
+            document.getElementById(
+                "panelOpciones"
+            );
 
 
-document
-    .getElementById(
-        "selectorTurno"
-    )
-    .addEventListener(
-        "change",
-        function() {
+        if (!panel) {
 
-            document.title =
-                "Hospital Demo - "
-                + this.value;
-
-        }
-    );
-
-
-
-/*
-====================================================
-CERRAR MODAL AL PULSAR FUERA
-====================================================
-*/
-
-
-document
-    .getElementById(
-        "modalFondo"
-    )
-    .addEventListener(
-        "click",
-        function(evento) {
-
-            if (
-                evento.target === this
-            ) {
-
-                cerrarModal();
-
-            }
+            return;
 
         }
-    );
+
+
+        if (
+            !panel.contains(e.target)
+            &&
+            !e.target.closest(".cama")
+        ) {
+
+            cerrarPanel();
+
+        }
+
+    }
+);
 
 
 
-/*
-====================================================
-INICIAR
-====================================================
-*/
-
+/* =====================================================
+   INICIAR APLICACIÓN
+===================================================== */
 
 dibujarHospital();
-
 
 </script>
 
 </body>
+
 </html>
